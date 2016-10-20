@@ -4,15 +4,17 @@ import numpy as np
 
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics import euclidean_distances
+from sklearn.metrics import confusion_matrix
 try:
     from sklearn.metrics.pairwise import cosine_distances
 except ImportError:
-    from scipy.spatial.distance import cosine as cosine_distances
-from sklearn.metrics import confusion_matrix
+    from sklearn.metrics.pairwise import cosine_similarity
+
 from fuzzywuzzy import fuzz
 import pandas as pd
 from pyemd import emd
 import tensorflow as tf
+from gensim.models.word2vec import Word2Vec
 
 
 class error_checker():
@@ -41,7 +43,6 @@ class error_checker():
 
         if not os.path.exists(w2v_dat):
             print("Caching word embeddings in memmapped format.                     Please be patient...")
-            from gensim.models.word2vec import Word2Vec
             wv = Word2Vec.load_word2vec_format(
                 binary_file,binary=True)
             fp = np.memmap(w2v_dat, dtype=np.double,
@@ -126,7 +127,10 @@ class error_checker():
 
         # use both euclidean and cosine dists
         D_euclidean = euclidean_distances(W_).astype(np.float64)
-        D_cosine = cosine_distances(W_).astype(np.float64)
+        try:
+            D_cosine = cosine_distances(W_,).astype(np.float64)
+        except NameError:
+            D_cosine = 1.-cosine_similarity(W_,).astype(np.float64)
 
         # using EMD (Earth Mover's Distance) from PyEMD
         distances_euclidean = emd(v_1,v_2,D_euclidean)
