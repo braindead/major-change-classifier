@@ -510,13 +510,18 @@ class error_checker():
             # model prediction
             try:
                 tf.reset_default_graph()
+                print('default graph has been reset')
                 (X,_),_,_,_,pred_y,lr,saver = self._build_graph(training=False)
+                print('graph has been built')
                 with tf.Session() as sess:
                     sess.run(tf.initialize_all_variables())
+                    print('variables have been intialized')
                     saver.restore(sess,self._save_path)
+                    print('session has been restored')
                     pred = sess.run([tf.arg_max(pred_y,1)],
                                     feed_dict=\
                                     {X: self._data_generator(str_1,str_2)})
+                    print('prediction has been made')
                     print(pred[0][0])
 
             # can't predict - unknowns now predicted as 0
