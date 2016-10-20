@@ -36,6 +36,7 @@ class error_checker():
         self._save_path = os.path.join(self.data_path,'model.ckpt')
         self.epsilon = 1e-4
 
+        '''
         binary_file = os.path.join(self.data_path,
                                    'GoogleNews-vectors-negative300.bin')
         w2v_dat = os.path.join(self.data_path,'embed.dat')
@@ -63,6 +64,7 @@ class error_checker():
         # mean of 20 rarest words, used as a stand-in for pairwise distances
         # if a word is out-of-vocabulary
         self.avg_rare_word = np.mean(np.vstack((self.embeddings[-20:])),axis=0)
+        '''
 
     def _get_dist(self,s_1,s_2):
         """Return counts of in-vocabulary and out-of-vocabulary items per
