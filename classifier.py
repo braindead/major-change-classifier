@@ -36,7 +36,6 @@ class error_checker():
         self._save_path = os.path.join(self.data_path,'model.ckpt')
         self.epsilon = 1e-4
 
-        '''
         binary_file = os.path.join(self.data_path,
                                    'GoogleNews-vectors-negative300.bin')
         w2v_dat = os.path.join(self.data_path,'embed.dat')
@@ -64,7 +63,6 @@ class error_checker():
         # mean of 20 rarest words, used as a stand-in for pairwise distances
         # if a word is out-of-vocabulary
         self.avg_rare_word = np.mean(np.vstack((self.embeddings[-20:])),axis=0)
-        '''
 
     def _get_dist(self,s_1,s_2):
         """Return counts of in-vocabulary and out-of-vocabulary items per
@@ -510,21 +508,16 @@ class error_checker():
             # model prediction
             try:
                 tf.reset_default_graph()
-                print('default graph has been reset')
                 (X,_),_,_,_,pred_y,lr,saver = self._build_graph(training=False)
-                print('graph has been built')
                 with tf.Session() as sess:
                     sess.run(tf.initialize_all_variables())
-                    print('variables have been intialized')
                     saver.restore(sess,self._save_path)
-                    print('session has been restored')
                     pred = sess.run([tf.arg_max(pred_y,1)],
                                     feed_dict=\
                                     {X: self._data_generator(str_1,str_2)})
-                    print('prediction has been made')
                     print(pred[0][0])
 
             # can't predict - unknowns now predicted as 0
             except:
-                print('could not predict')
+                print('Unknown')
 
