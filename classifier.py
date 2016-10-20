@@ -4,7 +4,10 @@ import numpy as np
 
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics import euclidean_distances
-from sklearn.metrics.pairwise import cosine_similarity,cosine_distances
+try:
+    from sklearn.metrics.pairwise import cosine_distances
+except ImportError:
+    from scipy.spatial.distance import cosine as cosine_distances
 from sklearn.metrics import confusion_matrix
 from fuzzywuzzy import fuzz
 import pandas as pd
