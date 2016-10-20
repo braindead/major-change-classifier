@@ -521,5 +521,5 @@ class error_checker():
 
             # can't predict - unknowns now predicted as 0
             except:
-                print(0)
+                print('could not predict')
 
