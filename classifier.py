@@ -3,12 +3,8 @@ import os
 import numpy as np
 
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.metrics import euclidean_distances
-from sklearn.metrics import confusion_matrix
-try:
-    from sklearn.metrics.pairwise import cosine_distances
-except ImportError:
-    from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics import euclidean_distances,confusion_matrix
+from sklearn.metrics.pairwise import cosine_similarity
 
 from fuzzywuzzy import fuzz
 import pandas as pd
@@ -488,17 +484,19 @@ class error_checker():
         self._FP = [list(self.raw_X[y_indices[i]]) for i in false_pos]
         self._FN = [list(self.raw_X[y_indices[i]]) for i in false_neg]
 
-    def predict(self,pair_array):
+    def predict(self,csv_file):
         """
         Predicts the type of error between the two strings in each row of
-        a 2d-array.
+        a CSV file.
 
         Returns:
             0 for minor, 1 for major,
             'No error' for identical strings,
             and 0 if a prediction cannot be made (was 'Unknown').
         """
-        for str_1,str_2 in pair_array:
+        
+        for row in np.genfromtxt(csv_file,dtype='str',delimiter=','):
+            str_1,str_2 = row[0],row[1]
 
             # strings identical
             if str_1 == str_2:
