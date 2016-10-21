@@ -121,12 +121,9 @@ class error_checker():
         if bad_rows.shape[0]>0:
             W_ = np.vstack((W_,bad_rows))
 
-        # use both euclidean and cosine dists
+        # use both euclidean and cosine dists (cosine dist is 1-cosine sim)
         D_euclidean = euclidean_distances(W_).astype(np.float64)
-        try:
-            D_cosine = cosine_distances(W_,).astype(np.float64)
-        except NameError:
-            D_cosine = 1.-cosine_similarity(W_,).astype(np.float64)
+        D_cosine = 1.-cosine_similarity(W_,).astype(np.float64)
 
         # using EMD (Earth Mover's Distance) from PyEMD
         distances_euclidean = emd(v_1,v_2,D_euclidean)
