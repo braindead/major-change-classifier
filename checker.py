@@ -1,4 +1,4 @@
-import classifiertest
+import classifier
 import sys
 
 try:
