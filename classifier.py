@@ -518,4 +518,4 @@ class error_checker():
                 except:
                     predictions.append('Unknown')
         
-        return ','.join(predictions)
+        print(','.join(predictions))
