@@ -488,30 +488,34 @@ class error_checker():
         Returns:
             0 for minor, 1 for major,
             'No error' for identical strings,
-            and 0 if a prediction cannot be made (was 'Unknown').
+            and 'Unknown' if a prediction cannot be made (could change to 0).
         """
-        
-        for row in np.genfromtxt(csv_file,dtype='str',delimiter=','):
-            str_1,str_2 = row[0],row[1]
+        predictions = []
+        # build graph and initialize session
+        tf.reset_default_graph()
+        (X,_),_,_,_,pred_y,lr,saver = self._build_graph(training=False)
+        with tf.Session() as sess:
+            sess.run(tf.initialize_all_variables())
+            saver.restore(sess,self._save_path)
 
-            # strings identical
-            if str_1 == str_2:
-                print('No error')
-                continue
+            # generate calculations from 2d array of input strings
+            for row in np.genfromtxt(csv_file,dtype='str',delimiter=','):
+                str_1,str_2 = row[0],row[1]
 
-            # model prediction
-            try:
-                tf.reset_default_graph()
-                (X,_),_,_,_,pred_y,lr,saver = self._build_graph(training=False)
-                with tf.Session() as sess:
-                    sess.run(tf.initialize_all_variables())
-                    saver.restore(sess,self._save_path)
+                # strings identical
+                if str_1 == str_2:
+                    predictions.append('No error')
+                    continue
+
+                # model prediction
+                try:
                     pred = sess.run([tf.arg_max(pred_y,1)],
                                     feed_dict=\
                                     {X: self._data_generator(str_1,str_2)})
-                    print(pred[0][0])
+                    predictions.append(str(pred[0][0]))
 
-            # can't predict - unknowns now predicted as 0
-            except:
-                print('Unknown')
-
+                # can't predict
+                except:
+                    predictions.append('Unknown')
+        
+        return ','.join(predictions)
