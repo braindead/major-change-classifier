@@ -512,7 +512,7 @@ class error_checker():
                     pred = sess.run([tf.arg_max(pred_y,1)],
                                     feed_dict=\
                                     {X: self._data_generator(str_1,str_2)})
-                    predictions.append(str(pred[0][0]))
+                    predictions.append(str(pred[0][0]+1))
 
                 # can't predict
                 except:
