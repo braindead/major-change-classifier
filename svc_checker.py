@@ -1,5 +1,6 @@
 import SVC
 import sys
+import numpy as np
 
 
 checker = SVC.Checker()
