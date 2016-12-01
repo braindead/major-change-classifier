@@ -101,6 +101,20 @@ class Checker():
 
         return data
 
+    def _oov_check(self,str1,str2):
+        # running out of time; this is clearly not optimal
+
+        words = []
+        s1_words = str1.split()
+        s2_words = str1.split()
+
+        words.extend(s1_words)
+        words.extend(s2_words)
+
+        if any([word not in self.vocab_dict for word in words]):
+            return True
+
+
 
     def predict(self,csv_file):
 
@@ -113,10 +127,12 @@ class Checker():
         predictions = []
 
         for row in numpy_file:
+            if self._oov_check(row[0],row[1]):
+                predictions.append("1")
+
             if row[1] == "":
                 predictions.append("1")
                 continue
-
             else:
                 predictions.append(str(self.model.predict(self._generate(row[0],row[1]))[0]))
 
