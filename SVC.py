@@ -129,6 +129,7 @@ class Checker():
         for row in numpy_file:
             if self._oov_check(row[0],row[1]):
                 predictions.append("1")
+                continue
 
             if row[1] == "":
                 predictions.append("1")
