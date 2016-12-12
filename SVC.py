@@ -281,7 +281,7 @@ class Checker():
         return cleaned
 
 
-    def predict(self,csv_file):
+    def predict(self,tsv_file):
         """Print a string of predictions for each pair in the CSV file
         """
 
@@ -289,7 +289,7 @@ class Checker():
         # then if it doesn't pass, skip the rest of the calculations and return a minor/major
 
 
-        numpy_file = np.genfromtxt(csv_file,dtype='str',delimiter=',').reshape([-1,2])
+        numpy_file = np.genfromtxt(tsv_file,dtype="str",delimiter="\t").reshape([-1,2])
 
         predictions = []
 
