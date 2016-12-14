@@ -10,8 +10,21 @@ from sklearn.metrics.pairwise import cosine_similarity
 from scribie_num2text import num_to_text
 
 class Checker():
-    """Many of the checks in place are irrelevant if we continue to immediately
-    classify anything with OOV elements as minor.
+    """Classifier using trained SVC files in "./SVC.pkl" and dependent "*.npy"
+    files used to differentiate major and minor errors between two versions of
+    the same transcription. Uses three metrics: Word Mover's Distance, ratio
+    of difference in index of words between strings (index is a proxy for word
+    rarity, and is from the word2vec embeddings trained on 3B words from
+    Google News), and the ratio of string similarity using Levenshtein
+    distance. Out-of-vocabulary (OOV) words are removed before making
+    calcualtions, after a number of processing steps to remove filler words
+    and transcription notes, as well as convert numbers (as digits) to strings
+    representing the numbers.
+
+    It is assumed that this class will be instantiated only as part of
+    "svc_checker.py", and located in the same directory as the aforementioned
+    SVC model files, a TSV file of pairs of strings with differences, and the
+    "embed.dat" and "embed.vocab" files created from the Google News vectors.
     """
 
 
@@ -31,80 +44,79 @@ class Checker():
             vocab_list = map(lambda string: string.strip(), f.readlines())
         self.vocab_dict = {w: i for i, w in enumerate(vocab_list)}
 
+        # filler words that will be removed
+        fillers = [
+            "yeah",
+            "yes",
+            "yup",
+            "m+ hm+",
+            "uh huh",
+            "okay",
+            "right",
+            "alright",
+            "all right",
 
-        fill_list = [
-                    "_+",
+            "oh+",
+            "aha",
+            "um+",
+            "hm+",
+            "mm+",
 
-                    "yeah",
-                    "yes",
-                    "yup",
-                    "m+ hm+",
-                    "uh huh",
-                    "okay",
-                    "right",
-                    "alright",
+            "i mean",
+            "i think",
+            "i guess",
+            "you know",
+            "kind of",
+            "kinda",
+            "like",
+            "really",
+            "actually",
+            "basically",
 
-                    "oh+",
-                    "aha",
-                    "um+",
-                    "hm+",
-                    "mm+",
+            "a",
+            "an",
+            "the",
 
-                    "i mean",
-                    "i think",
-                    "i guess",
-                    "you know",
-                    "kind of",
-                    "kinda",
-                    "like",
-                    "really",
-                    "actually",
-                    "basically",
+            "and",
+            "of",
+            "or",
+            "so",
+            "to",
+            "on",
+            "in",
+            "it",
+            "that",
+            "am",
+            #"is",
 
-                    "a",
-                    "an",
-                    "the",
+            "excuse me",
+            "so to speak",
+            "that's good",
 
-                    "and",
-                    "of",
-                    "on",
-                    "in",
-                    "or",
-                    "so[^']",
-                    "it[^']",
-                    "that[^']",
-                    "is",
-                    "to",
+            "s\d+"
+            ]
 
-                    "excuse me",
-                    "so to speak",
-                    "that's good",
-
-
-                    "\d{6}",
-                    "S\d+",
-                    "[^']s"
-
-
-                    "chuckle",
-                    "laughter",
-                    "pause",
-                    "noise",
-                    "music",
-                    "applause",
-                    "vocalization",
-                    "video playback",
-                    "automated voice",
-                    "foreign language",
-                    "overlapping conversation",
-                    "background conversation",
-                    "start paren",
-                    "end paren"
-                    ]
+        metas = [
+            "chuckle",
+            "laughter",
+            "pause",
+            "noise",
+            "music",
+            "applause",
+            "vocalization",
+            "video playback",
+            "automated voice",
+            "foreign language",
+            "overlapping conversation",
+            "background conversation",
+            "start paren",
+            "end paren"
+            ]
 
 
-        self._pattern = "\\b"+"\\b|\\b".join(fill_list)+"\\b"
-
+        # metas appear within [brackets], while fillers do not
+        self._fillers = "\\b"+"\\b|\\b".join(fillers)+"\\b"
+        self._metas = "\["+"\]|\[".join(metas)+"\]"
 
 
     def _indexer(self,string1,string2):
@@ -114,23 +126,9 @@ class Checker():
         s1_features = string1.split()
         s2_features = string2.split()
 
-        # indices of in-vocab words in each string
-
-        # oov already discarded oov so not using next few lines
-        # leave out oov
-        #s1_idx = [self.vocab_dict[word] for word in s1_features if word in self.vocab_dict]
-        #s2_idx = [self.vocab_dict[word] for word in s2_features if word in self.vocab_dict]
-
+        # indices of words in each string
         s1_idx = [self.vocab_dict[word] for word in s1_features]
         s2_idx = [self.vocab_dict[word] for word in s2_features]
-
-        # if only oov or empty
-        # now only if empty -- setting this to 0 is like saying it's one super common word
-        # this is where absolute value may be more helpful
-        if s1_idx == []:
-            s1_idx = [0]
-        #if s2_idx == []:
-        #    s2_idx = [1.5e6]
 
         # taking mean index of each string
         ### now thinking sum is better, test later ###
@@ -143,7 +141,8 @@ class Checker():
 
 
     def _str_ratio(self,string1,string2):
-        """Get the string similarity as a ratio from fuzzywuzzy, using Levenshtein distance
+        """Get the string similarity as a ratio from fuzzywuzzy, using
+        Levenshtein distance
         """
 
         ratio = fuzz.ratio(string1,string2)
@@ -152,24 +151,10 @@ class Checker():
 
 
     def _wmd_getter(self,string1,string2):
-        """Get the Word Mover's Distance between the two strings, using cosine distance
-        between word2vec embeddings trained on GoogleNews, and Earth Mover's Distance from
-        pyemd.
+        """Get the Word Mover's Distance between the two strings, using cosine
+        distance between word2vec embeddings trained on Google News, and Earth
+        Mover's Distance from pyemd
         """
-
-        # not considering oovs at the moment so not using the next few lines
-        #s1_in = ' '.join([word for word in string1.split() if word in self.vocab_dict])
-        #s2_in = ' '.join([word for word in string2.split() if word in self.vocab_dict])
-
-        # there is an embedding for 'UNK'... just a placeholder of something rare
-        # could do this check as a preliminary before having to calculate anything
-        if string1.strip() == '':
-            string1 = 'UNK'
-        # shouldn't be possible for string2 to be blank because of oov check and logic check in predict
-        #if string2.strip() == '':
-        #    string2 = 'UNK'
-
-        #vect = CountVectorizer(token_pattern='[\w\']+').fit([s1_in,s2_in])
 
         vect = CountVectorizer(token_pattern='[\w\']+').fit([string1,string2])
         #features = np.asarray(vect.get_feature_names())
@@ -177,12 +162,11 @@ class Checker():
         W_ = self.embeddings[[self.vocab_dict[word] for word in features]]
 
         # get 'flow' vectors; emd needs float64
-        #v_1, v_2 = vect.transform([s1_in, s2_in])
         v_1,v_2 = vect.transform([string1,string2])
         v_1 = v_1.toarray().ravel().astype(np.float64)
         v_2 = v_2.toarray().ravel().astype(np.float64)
 
-        # normalize vectors so as not to reward shorter strings in WMD
+        # normalize vectors so as not to reward shorter strings in WMD calc
         v_1 /= (v_1.sum()+self.eps)
         v_2 /= (v_2.sum()+self.eps)
 
@@ -196,130 +180,147 @@ class Checker():
 
 
     def _generate(self,str1,str2):
-        """Return a numpy array of the values for each metric calclulated on the strings
+        """Return a numpy array of the values for each metric calclulated
+        between the two strings
         """
 
+        # don't allow blank strings into the calculations
+        # str2 will not be blank, as that check comes before this
+        if str1 == "":
+            # "unk" just happens to be a rare token in the Google vectors
+            str1 = "unk"
         wmd = self._wmd_getter(str1,str2)
         idx = self._indexer(str1,str2)
         ratio = self._str_ratio(str1,str2)
 
+        # proper format on which the model was trained
         data = np.asarray([wmd,idx,ratio]).reshape([1,-1])
 
         return data
 
 
-    def _oov_check(self,str1,str2):
-        """Return True if there are any OOV words in the two strings.  Used to return a
-        prediction of "1" from self.predict()
+    def _oov_clean(self,string):
+        """Return the string with all OOVs removed
         """
 
-        #words = [word for word in " ".join((str1,str2)).split()]
-        words = " ".join((str1,str2)).split()
+        no_oov = " ".join([word for word in string.split()
+                                if word in self.vocab_dict])
 
-        #if any([word not in self.vocab_dict for word in words]):
-        #    return True
+        return no_oov
 
-        oov = any([word not in self.vocab_dict for word in words])
-
-        return oov
 
     def _num_replace(self,string):
+        """Replace digits with spelled-out versions of the numbers they
+        represent, using scribie_num2text
+        """
 
+        # grab a list of digits and a list of their string representations
         nums = re.findall("\d+",string)
-        words = [num_to_text(num) for num in nums]
+        # extra spaces are to preserve mixes of letters and numbers
+        words = [" "+num_to_text(num)+" " for num in nums]
+
+        # iteratively replace digits with strings
         for num,word in zip(nums,words):
             string = re.sub(num,word,string)
 
         return string
 
     def _cleaner(self,strings):
+        """Return individual cleaned string with casing, punctuation, metas,
+        and fillers removed, numbers converted to words, and OOVs converted
+        or removed.
+        """
 
         cleaned = []
 
         for text in strings:
 
+            text = text.lower()
+            text = re.sub("\[*\d:\d+:\d+.\d\]*","",text)
+            text = re.sub("-|:"," ",text)
 
-        #e = e.replace /\[\d:\d+:\d+\.\d\]/, ''
+            # remove metas
+            text = re.sub(self._metas,"",text)
 
+            # keep only letters, numbers, spaces, and single <'>
+            text = re.sub("[^a-z0-9 ']","",text)
 
+            ### whether or not to keep \\b depends on whether or not there are single quotes in the text ###
+            text = re.sub("'til{1,2}\\b","until",text) #
+            text = re.sub("'em","them",text) #
+            text = re.sub("'cause","because",text) #
+            text = re.sub("\\bsorta\\b","sort of",text) #
+            text = re.sub("(d|g)oin'","\g<1>oing ",text) #
 
+            ### this needs more thought. what about "treatise","appraise",etc. ###
+            #text = re.sub("(\w+i|y)s(ation|ing|e|es|ed|r)\\b","\\1z\\2",text)
 
-        # WHAT ABOUT something like the max value in 10 of the 300 dimensions.. or with all with a nn
+            ### I->I am is classified as major so adding "am" to fillers ###
+            text = re.sub("'m"," am",text) #
+            text = re.sub("'ve"," have",text)
+            text = re.sub("'ll"," will",text)
 
-            # capitals matter here like with S7 -- so get rid of them first
-            text = re.sub("\\b-|:\\b"," ",text)
-            text = re.sub("'til{1,2}\\b","until",text) # GOOD *
-            text = re.sub("'em","them ",text) # GOOD *
-            text = re.sub("'cause\\b"," because",text) # GOOD *
-            text = re.sub("\\bsorta\\b","sort of",text) # GOOD
-            text = re.sub("\\b(d|g)oin'","\\1oing ",text)# GOOD *
-            # comma is not a word boundary and neither is start/end of string
-            text = re.sub("(\\w+i|y)s(ation|ing|e|es|ed|r)","\\1z\\2",text) # GOOD
-            text = re.sub("\\b'm\\b"," am",text) # GOOD
-            text = re.sub("\\b've\\b"," have",text) # GOOD
-            text = re.sub("\\b'll\\b"," will",text) # GOOD
-            text = re.sub("\\bcan't\\b","cannot",text) # GOOD
-            text = re.sub("\\bwon't\\b","will not",text) # GOOD
-            text = re.sub("\\bain't\\b","are not",text) # GOOD
-            text = re.sub("n't\\b"," not",text) # GOOD
-            text = re.sub("\\d+\\b1st\\b","first",text) # GOOD
-            text = re.sub("\\b2nd\\b","second",text) # GOOD
-            text = re.sub("\\b3rd\\b","third",text) # GOOD
-            text = re.sub("(\d+)(st|nd|rd|th)",r"\1",text) # GOOD
-            text = re.sub(self._pattern,"",text)
+            ### currently, cannot->can is major, vice-versa is minor ###
+            # and can->can't and can't->can are minor
+            text = re.sub("can't","cannot",text) #
 
+            text = re.sub("won't","will not",text)
+            text = re.sub("ain't","are not",text)
+            text = re.sub("n't"," not",text)
+            text = re.sub("'s","",text)
+
+            # any ordinals with 1st/2nd/3rd are fixed
+            # others have many exceptions, so just convert to cardinals
+            text = re.sub("(\d*)(1st)","\g<1>0 first",text)
+            text = re.sub("(\d*)(2nd)","\g<1>0 second",text)
+            text = re.sub("(\d*)(3rd)","\g<1>0 third",text)
+            text = re.sub("(\d+)(th)","\g<1>",text)
+
+            # remove fillers
+            text = re.sub(self._fillers,"",text)
+
+            # replace digits
             text = self._num_replace(text)
 
-            clean = text.lower()
-            clean = re.sub("[^a-z ']","",clean)
-            clean = re.sub("\\s+"," ",clean).strip()
-
+            # remove OOVs
+            clean = self._oov_clean(text)
 
             cleaned.append(clean)
-
 
         return cleaned
 
 
     def predict(self,tsv_file):
-        """Print a string of predictions for each pair in the CSV file
+        """Print a string of predictions for each pair in the TSV file
         """
 
-        # maybe everything should pass through a check that can stand in for one of the calculations
-        # then if it doesn't pass, skip the rest of the calculations and return a minor/major
+        # commented rows are for testing
 
-
-        numpy_file = np.genfromtxt(tsv_file,dtype="str",delimiter="\t").reshape([-1,2])
+        numpy_file = np.genfromtxt(tsv_file,
+                                   dtype="str",delimiter="\t").reshape([-1,2])
+        #numpy_file = np.genfromtxt(tsv_file,
+        #                           dtype="str",delimiter="*").reshape([-1,2])
 
         predictions = []
 
         for row_ in numpy_file:
 
+            # clean each string pair of all fillers, metas, numbers, OOVs, etc.
             row = self._cleaner(row_)
 
             s1,s2 = row[0],row[1]
-            # if there is at least one oov word in the pair, the error is minor
-            #if self._oov_check(row[0],row[1]):
-            if self._oov_check(s1,s2):
-                predictions.append("1")
-                #predictions.extend([row_[0],row[0]])
-                #predictions.extend([row_[1],row[1]])
-                continue
 
-            # second string is blank; complete deletions are considered minor
-            #if row[1] == "":
+            # complete deletions are considered minor
             if s2 == "":
                 predictions.append("1")
                 #predictions.extend([row_[0],row[0]])
                 #predictions.extend([row_[1],row[1]])
                 continue
 
-            # predict based on the model; else is redundant
-            else:
-                #predictions.append(str(self.model.predict(self._generate(row[0],row[1]))[0]))
-                predictions.append(str(self.model.predict(self._generate(s1,s2))[0]))
-                #predictions.extend([row_[0],row[0]])
-                #predictions.extend([row_[1],row[1]])
+            # predict based on the model
+            predictions.append(str(self.model.predict(self._generate(s1,s2))[0]))
+            #predictions.extend([row_[0],row[0]])
+            #predictions.extend([row_[1],row[1]])
 
         predictions = ",".join(predictions)
         #predictions = np.asarray(predictions).reshape([-1,5])

@@ -1,11 +1,9 @@
-import SVC
 import sys
-import numpy as np
-
+import SVC
 
 checker = SVC.Checker()
 
-if sys.argv[1] is not None:
+if len(sys.argv) > 1:
     checker.predict(sys.argv[1])
 else:
     checker.predict('./data.csv')

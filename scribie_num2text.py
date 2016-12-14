@@ -1,9 +1,7 @@
 
 def num_to_text(number):
     """Convert positive integers to strings with no spaces. Written for
-    use with Scribie major change SVC classifier. Leading and trailing
-    spaces are to avoid creating OOV words in cases where the sample
-    contains a mix of letters and numbers.
+    use with Scribie major change SVC classifier
     """
 
     number = str(number)
@@ -25,7 +23,8 @@ def num_to_text(number):
     large = {k:v for k,v in zip(range(4),
         ["thousand","million","billion","trillion"])}
 
-    # single digits
+    # single digits. zero is nothing to allow for separating 1st/2nd/3rd from larger numbers
+    # in Checker._cleaner()
     if length < 2:
         unit = int(number)
         if unit==0:
@@ -71,7 +70,7 @@ def num_to_text(number):
                                                large[g-1]))
         number = next_chunk
 
-    result = ' {} {} '.format(prefix,num_to_text(int(number)))
+    result = '{} {}'.format(prefix,num_to_text(int(number)))
 
     return result
 
