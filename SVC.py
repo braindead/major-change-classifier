@@ -1,7 +1,27 @@
+"""Major/Minor Change Classifier
+
+Classifier using trained SVC files in "./SVC.pkl" and dependent "*.npy"
+files used to differentiate major and minor errors between two versions of
+the same transcription. Uses three metrics: Word Mover's Distance, ratio
+of difference in index of words between strings (index is a proxy for word
+rarity, and is from the word2vec embeddings trained on 3B words from
+Google News), and the ratio of string similarity using Levenshtein
+distance. Out-of-vocabulary (OOV) words are removed before making
+calcualtions, after a number of processing steps to remove filler words
+and transcription notes, as well as convert numbers (as digits) to strings
+representing the numbers.
+
+It is assumed that this class will be instantiated only as part of
+"svc_checker.py", and located in the same directory as the aforementioned
+SVC model files, a TSV file of pairs of strings with differences, and the
+"embed.dat" and "embed.vocab" files created from the Google News vectors.
+"""
+
 import os
-import numpy as np
 import re
+
 from fuzzywuzzy import fuzz
+import numpy as np
 from pyemd import emd
 from sklearn.externals import joblib
 from sklearn.feature_extraction.text import CountVectorizer
@@ -10,23 +30,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 from scribie_num2text import num_to_text
 
 class Checker():
-    """Classifier using trained SVC files in "./SVC.pkl" and dependent "*.npy"
-    files used to differentiate major and minor errors between two versions of
-    the same transcription. Uses three metrics: Word Mover's Distance, ratio
-    of difference in index of words between strings (index is a proxy for word
-    rarity, and is from the word2vec embeddings trained on 3B words from
-    Google News), and the ratio of string similarity using Levenshtein
-    distance. Out-of-vocabulary (OOV) words are removed before making
-    calcualtions, after a number of processing steps to remove filler words
-    and transcription notes, as well as convert numbers (as digits) to strings
-    representing the numbers.
-
-    It is assumed that this class will be instantiated only as part of
-    "svc_checker.py", and located in the same directory as the aforementioned
-    SVC model files, a TSV file of pairs of strings with differences, and the
-    "embed.dat" and "embed.vocab" files created from the Google News vectors.
-    """
-
 
     def __init__(self):
 
@@ -44,75 +47,79 @@ class Checker():
             vocab_list = map(lambda string: string.strip(), f.readlines())
         self.vocab_dict = {w: i for i, w in enumerate(vocab_list)}
 
-        # filler words that will be removed
+        # filler words that will be removed (regex)
         fillers = [
+            "all right",
+            "alright",
+            "m+ hm+",
+            "okay",
+            "right",
+            "uh huh",
             "yeah",
             "yes",
             "yup",
-            "m+ hm+",
-            "uh huh",
-            "okay",
-            "right",
-            "alright",
-            "all right",
 
-            "oh+",
             "aha",
-            "um+",
+            "oh+",
             "hm+",
             "mm+",
+            "um+",
 
-            "i mean",
-            "i think",
-            "i guess",
-            "you know",
-            "kind of",
-            "kinda",
-            "like",
-            "really",
             "actually",
             "basically",
+            "i guess",
+            "i mean",
+            "i think",
+            "kinda",
+            "kind of",
+            "like",
+            "really",
+            "sorta",
+            "sort of",
+            "you know",
 
             "a",
             "an",
             "the",
 
             "and",
-            "of",
-            "or",
-            "so",
-            "to",
-            "on",
             "in",
             "it",
+            "of",
+            "on",
+            "or",
+            "so",
             "that",
+            "to",
+
             "am",
             #"is",
 
             "excuse me",
+            "o'clock",
             "so to speak",
             "that's good",
 
+            # speaker tracking
             "s\d+"
             ]
 
         metas = [
-            "chuckle",
-            "laughter",
-            "pause",
-            "noise",
-            "music",
             "applause",
-            "vocalization",
-            "video playback",
             "automated voice",
-            "foreign language",
-            "overlapping conversation",
             "background conversation",
+            "chuckle",
+            "end paren",
+            "foreign language",
+            "laughter",
+            "music",
+            "noise",
+            "overlapping conversation",
+            "pause",
             "start paren",
-            "end paren"
+            "video playback",
+            "vocalization"
             ]
-
 
         # metas appear within [brackets], while fillers do not
         self._fillers = "\\b"+"\\b|\\b".join(fillers)+"\\b"
@@ -120,9 +127,11 @@ class Checker():
 
 
     def _indexer(self,string1,string2):
-        """Get the ratio of mean index difference between the two strings
+        """Get the summed index differences between the two strings, where the
+        index is a proxy for the rarity of the word in the training corpus
         """
 
+        # words in each string
         s1_features = string1.split()
         s2_features = string2.split()
 
@@ -130,19 +139,19 @@ class Checker():
         s1_idx = [self.vocab_dict[word] for word in s1_features]
         s2_idx = [self.vocab_dict[word] for word in s2_features]
 
-        # taking mean index of each string
-        ### now thinking sum is better, test later ###
-        s1 = np.mean(s1_idx)
-        s2 = np.mean(s2_idx)
+        # sum index values of each string
+        s1 = sum(s1_idx)
+        s2 = sum(s2_idx)
 
-        diff = float(s2-s1+self.eps)/(s2+s1+self.eps)
+        # normalized ratio
+        diff = float(s2-s1)/(s2+s1+self.eps)
 
         return diff
 
 
     def _str_ratio(self,string1,string2):
         """Get the string similarity as a ratio from fuzzywuzzy, using
-        Levenshtein distance
+        Levenshtein (edit) distance
         """
 
         ratio = fuzz.ratio(string1,string2)
@@ -156,9 +165,11 @@ class Checker():
         Mover's Distance from pyemd
         """
 
+        # count vectorize strings into tokens including a single <'>
         vect = CountVectorizer(token_pattern='[\w\']+').fit([string1,string2])
-        #features = np.asarray(vect.get_feature_names())
         features = vect.get_feature_names()
+
+        # numpy memmap of vectors for each in-vocabulary word in the strings
         W_ = self.embeddings[[self.vocab_dict[word] for word in features]]
 
         # get 'flow' vectors; emd needs float64
@@ -184,19 +195,14 @@ class Checker():
         between the two strings
         """
 
-        # don't allow blank strings into the calculations
-        # str2 will not be blank, as that check comes before this
-        if str1 == "":
-            # "unk" just happens to be a rare token in the Google vectors
-            str1 = "unk"
         wmd = self._wmd_getter(str1,str2)
         idx = self._indexer(str1,str2)
         ratio = self._str_ratio(str1,str2)
 
         # proper format on which the model was trained
-        data = np.asarray([wmd,idx,ratio]).reshape([1,-1])
+        values = np.asarray([wmd,idx,ratio]).reshape([1,-1])
 
-        return data
+        return values
 
 
     def _oov_clean(self,string):
@@ -228,15 +234,20 @@ class Checker():
     def _cleaner(self,strings):
         """Return individual cleaned string with casing, punctuation, metas,
         and fillers removed, numbers converted to words, and OOVs converted
-        or removed.
+        or removed
         """
 
         cleaned = []
 
         for text in strings:
 
+            # lowercase everything
             text = text.lower()
+
+            # remove timestamps
             text = re.sub("\[*\d:\d+:\d+.\d\]*","",text)
+
+            # remove dashes and colons
             text = re.sub("-|:"," ",text)
 
             # remove metas
@@ -245,32 +256,31 @@ class Checker():
             # keep only letters, numbers, spaces, and single <'>
             text = re.sub("[^a-z0-9 ']","",text)
 
-            ### whether or not to keep \\b depends on whether or not there are single quotes in the text ###
-            text = re.sub("'til{1,2}\\b","until",text) #
-            text = re.sub("'em","them",text) #
-            text = re.sub("'cause","because",text) #
-            text = re.sub("\\bsorta\\b","sort of",text) #
-            text = re.sub("(d|g)oin'","\g<1>oing ",text) #
+            # certain casual forms
+            text = re.sub("'til{1,2}","until",text)
+            text = re.sub("'em","them",text)
+            text = re.sub("'cause","because",text)
+            text = re.sub("(d|g)oin'","\g<1>oing ",text)
 
-            ### this needs more thought. what about "treatise","appraise",etc. ###
+            # british spellings that are OOV
+            ### needs more thought. what about "treatise", "appraise", etc. ###
             #text = re.sub("(\w+i|y)s(ation|ing|e|es|ed|r)\\b","\\1z\\2",text)
 
-            ### I->I am is classified as major so adding "am" to fillers ###
+            # contracted forms
+            # lowercase "i'm" is OOV; currently removing "am" in fillers
             text = re.sub("'m"," am",text) #
             text = re.sub("'ve"," have",text)
             text = re.sub("'ll"," will",text)
-
             ### currently, cannot->can is major, vice-versa is minor ###
             # and can->can't and can't->can are minor
             text = re.sub("can't","cannot",text) #
-
             text = re.sub("won't","will not",text)
             text = re.sub("ain't","are not",text)
             text = re.sub("n't"," not",text)
-            text = re.sub("'s","",text)
+            text = re.sub("'s\\b","",text)
+            text = re.sub("'d\\b","",text)
 
-            # any ordinals with 1st/2nd/3rd are fixed
-            # others have many exceptions, so just convert to cardinals
+            # ordinals
             text = re.sub("(\d*)(1st)","\g<1>0 first",text)
             text = re.sub("(\d*)(2nd)","\g<1>0 second",text)
             text = re.sub("(\d*)(3rd)","\g<1>0 third",text)
@@ -282,7 +292,7 @@ class Checker():
             # replace digits
             text = self._num_replace(text)
 
-            # remove OOVs
+            # remove OOVs and extra spaces
             clean = self._oov_clean(text)
 
             cleaned.append(clean)
@@ -294,7 +304,7 @@ class Checker():
         """Print a string of predictions for each pair in the TSV file
         """
 
-        # commented rows are for testing
+        # commented rows are for examining inputs to the model
 
         numpy_file = np.genfromtxt(tsv_file,
                                    dtype="str",delimiter="\t").reshape([-1,2])
@@ -317,7 +327,14 @@ class Checker():
                 #predictions.extend([row_[1],row[1]])
                 continue
 
-            # predict based on the model
+            # empty first string with non-empty second is counted as major
+            if s1 == "":
+                predictions.append("2")
+                #predictions.extend([row_[0],row[0]])
+                #predictions.extend([row_[1],row[1]])
+                continue
+
+            # predict based on the trained SVC
             predictions.append(str(self.model.predict(self._generate(s1,s2))[0]))
             #predictions.extend([row_[0],row[0]])
             #predictions.extend([row_[1],row[1]])
