@@ -19,6 +19,7 @@ SVC model files, a TSV file of pairs of strings with differences, and the
 
 import os
 import re
+import json
 
 from fuzzywuzzy import fuzz
 import numpy as np
@@ -345,3 +346,30 @@ class Checker():
         #predictions = np.asarray(predictions).reshape([-1,5])
 
         print(predictions)
+
+    def predict_json(self, json_file):
+
+        with open(json_file) as data_file:    
+            data = json.load(data_file)
+
+        predictions = []
+
+        for row_ in data:
+            row = self._cleaner(row_)
+
+            s1,s2 = row[0],row[1]
+
+            # complete deletions are considered minor
+            if s2 == "":
+                predictions.append("1")
+                continue
+
+            # insertions are considered major
+            if s1 == "":
+                predictions.append("2")
+                continue
+
+            # predict based on the trained SVC
+            predictions.append(str(self.model.predict(self._generate(s1,s2))[0]))
+
+        print(json.dumps(predictions))
