@@ -78,6 +78,7 @@ class Checker():
             "sorta",
             "sort of",
             "you know",
+            "i don't know",
 
             "a",
             "an",
@@ -295,7 +296,6 @@ class Checker():
             text = re.sub("can't","cannot",text) #
             text = re.sub("won't","will not",text)
             text = re.sub("ain't","are not",text)
-            text = re.sub("n't"," not",text)
             text = re.sub("'s\\b","",text)
             text = re.sub("'d\\b","",text)
 
@@ -363,17 +363,17 @@ class Checker():
 
         print(predictions)
 
-    def check_known_minor(self, row):
+    def is_known_minor(self, row):
         try:
-            return self.known_minors.index(",".join(row))
+            return self.known_minors.index(",".join(row)) >= 0
         except ValueError:
-            return -1
+            return False
 
-    def check_known_major(self, row):
+    def is_known_major(self, row):
         try:
-            return self.known_majors.index(",".join(row))
+            return self.known_majors.index(",".join(row)) >= 0
         except ValueError:
-            return -1
+            return False
 
     def predict_json(self, json_file):
 
@@ -397,11 +397,11 @@ class Checker():
                 predictions.append("2")
                 continue
 
-            if self.check_known_minor(row) > 0:
+            if self.is_known_minor(row):
                 predictions.append("1")
                 continue
 
-            if self.check_known_major(row) > 0:
+            if self.is_known_major(row):
                 predictions.append("2")
                 continue
 
