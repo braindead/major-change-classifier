@@ -92,6 +92,7 @@ class Checker():
             "excuse me",
             "so to speak",
             "that's good",
+            "quote unquote",
 
             "s\d+"
             ]
@@ -250,7 +251,7 @@ class Checker():
             text = re.sub("'em","them",text) #
             text = re.sub("'cause","because",text) #
             text = re.sub("\\bsorta\\b","sort of",text) #
-            text = re.sub("(d|g)oin'","\g<1>oing ",text) #
+            text = re.sub(r"(\w+)in'",r"\1ing",text) #
 
             ### this needs more thought. what about "treatise","appraise",etc. ###
             #text = re.sub("(\w+i|y)s(ation|ing|e|es|ed|r)\\b","\\1z\\2",text)
