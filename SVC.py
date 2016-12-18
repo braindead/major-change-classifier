@@ -367,13 +367,19 @@ class Checker():
         try:
             return self.known_minors.index(",".join(row)) >= 0
         except ValueError:
-            return False
+            try:
+                return self.known_minors.index(",".join(list(reversed(row)))) >= 0
+            except ValueError:
+                return False
 
     def is_known_major(self, row):
         try:
             return self.known_majors.index(",".join(row)) >= 0
         except ValueError:
-            return False
+            try:
+                return self.known_majors.index(",".join(list(reversed(row)))) >= 0
+            except ValueError:
+                return False
 
     def predict_json(self, json_file):
 
