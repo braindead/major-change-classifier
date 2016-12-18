@@ -123,6 +123,22 @@ class Checker():
             "vocalization"
             ]
 
+        self.known_minors = [
+                "can,could",
+                "cheque,check",
+                "cheques,checks",
+            ]
+
+        self.known_majors = [
+                "advise,advice",
+                "seemless,seamless",
+                "affects,infects",
+                "affect,effect",
+                "spilling,spieling",
+                "were unavailable,weren't available",
+                "totally,absolutely",
+            ]
+
         # metas appear within [brackets], while fillers do not
         self._fillers = "\\b"+"\\b|\\b".join(fillers)+"\\b"
         self._metas = "\["+"\]|\[".join(metas)+"\]"
@@ -296,9 +312,9 @@ class Checker():
             text = self._num_replace(text)
 
             # remove OOVs and extra spaces
-            clean = self._oov_clean(text)
+            #clean = self._oov_clean(text)
 
-            cleaned.append(clean)
+            cleaned.append(text)
 
         return cleaned
 
@@ -347,6 +363,18 @@ class Checker():
 
         print(predictions)
 
+    def check_known_minor(self, row):
+        try:
+            return self.known_minors.index(",".join(row))
+        except ValueError:
+            return -1
+
+    def check_known_major(self, row):
+        try:
+            return self.known_majors.index(",".join(row))
+        except ValueError:
+            return -1
+
     def predict_json(self, json_file):
 
         with open(json_file) as data_file:    
@@ -368,6 +396,17 @@ class Checker():
             if s1 == "":
                 predictions.append("2")
                 continue
+
+            if self.check_known_minor(row) > 0:
+                predictions.append("1")
+                continue
+
+            if self.check_known_major(row) > 0:
+                predictions.append("2")
+                continue
+
+            s1 = self._oov_clean(s1)
+            s2 = self._oov_clean(s2)
 
             # predict based on the trained SVC
             predictions.append(str(self.model.predict(self._generate(s1,s2))[0]))
