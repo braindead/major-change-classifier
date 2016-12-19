@@ -266,6 +266,9 @@ class Checker():
             # remove timestamps
             text = re.sub("\[*\d:\d+:\d+.\d\]*","",text)
 
+            # convert $ to dollars 
+            text = re.sub("\$(\d+)","\1 dollars",text)
+
             # remove dashes and colons
             text = re.sub("-|:"," ",text)
 
