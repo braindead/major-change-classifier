@@ -393,16 +393,6 @@ class Checker():
 
             s1,s2 = row[0],row[1]
 
-            # complete deletions are considered minor
-            if s2 == "":
-                predictions.append("1")
-                continue
-
-            # insertions are considered major
-            if s1 == "":
-                predictions.append("2")
-                continue
-
             if self.is_known_minor(row):
                 predictions.append("1")
                 continue
@@ -413,6 +403,16 @@ class Checker():
 
             s1 = self._oov_clean(s1)
             s2 = self._oov_clean(s2)
+
+            # complete deletions are considered minor
+            if s2 == "":
+                predictions.append("1")
+                continue
+
+            # insertions are considered major
+            if s1 == "":
+                predictions.append("2")
+                continue
 
             # predict based on the trained SVC
             predictions.append(str(self.model.predict(self._generate(s1,s2))[0]))
