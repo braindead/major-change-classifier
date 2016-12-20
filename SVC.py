@@ -149,6 +149,7 @@ class Checker():
                 "can,could",
                 "cheque,check",
                 "cheques,checks",
+                "organisation,organization",
             ]
 
         self.known_majors = [
