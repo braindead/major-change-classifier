@@ -165,6 +165,7 @@ class Checker():
                 "spilling,spieling",
                 "were unavailable,weren't available",
                 "totally,absolutely",
+                "complement,compliment",
                 "complimentary,complementary",
             ]
 
