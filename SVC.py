@@ -84,6 +84,7 @@ class Checker():
             "that's good",
             "quote unquote",
             "thank you",
+            "chapter",
 
             "right",
             "alright",
