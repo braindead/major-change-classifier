@@ -59,6 +59,7 @@ class Checker():
             "a+h",
             "o+h",
             "aha",
+            "o+ps",
             "ah-ha",
             "uh huh",
             "m+ hm+",
@@ -82,6 +83,7 @@ class Checker():
             "so to speak",
             "that's good",
             "quote unquote",
+            "thank you",
 
             "right",
             "alright",
@@ -120,6 +122,8 @@ class Checker():
             "is",
             "if",
             "no",
+            "he",
+            "do",
 
             "a",
             "i",
@@ -150,6 +154,7 @@ class Checker():
                 "cheque,check",
                 "cheques,checks",
                 "organisation,organization",
+                "defense,defence",
             ]
 
         self.known_majors = [
