@@ -157,6 +157,7 @@ class Checker():
                 "organisation,organization",
                 "defense,defence",
                 "behavioural,behavioral",
+                "enamoured,enamored",
             ]
 
         self.known_majors = [
@@ -327,6 +328,7 @@ class Checker():
             text = re.sub("'m"," am",text) #
             text = re.sub("'ve"," have",text)
             text = re.sub("'ll"," will",text)
+            text = re.sub("'re"," are",text)
             ### currently, cannot->can is major, vice-versa is minor ###
             # and can->can't and can't->can are minor
             text = re.sub("can't","cannot",text) #
