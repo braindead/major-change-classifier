@@ -170,6 +170,7 @@ class Checker():
                 "complement,compliment",
                 "complimentary,complementary",
                 "accumulative,a cumulative",
+                "affective,effective",
             ]
 
         # metas appear within [brackets], while fillers do not
