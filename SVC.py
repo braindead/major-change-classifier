@@ -158,6 +158,7 @@ class Checker():
                 "defense,defence",
                 "behavioural,behavioral",
                 "enamoured,enamored",
+                "vigour,vigor",
             ]
 
         self.known_majors = [
