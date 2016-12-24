@@ -130,7 +130,7 @@ class Checker():
             "i",
 
             # speaker tracking
-            "s\d+"
+            "s\d+",
             ]
 
         metas = [
@@ -302,6 +302,9 @@ class Checker():
 
             # convert $ to dollars 
             text = re.sub("\$(\d+)","\1 dollars",text)
+
+            # convert $ to dollars 
+            text = re.sub(",000,","",text)
 
             # remove dashes and colons
             text = re.sub("-|:"," ",text)
