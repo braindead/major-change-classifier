@@ -1,3 +1,5 @@
+# coding=utf8
+
 """Major/Minor Change Classifier
 
 Classifier using trained SVC files in "./SVC.pkl" and dependent "*.npy"
@@ -303,10 +305,13 @@ class Checker():
             text = re.sub("\[*\d:\d+:\d+.\d\]*","",text)
 
             # convert $ to dollars 
-            text = re.sub("\$(\d+)","\1 dollars",text)
+            text = re.sub("\$([\d,]+)",r"\1 dollars",text)
 
-            # convert $ to dollars 
-            text = re.sub(",000,","",text)
+            # convert £ to pounds
+            #text = re.sub("£([\d,]+)", r"\1 pounds",text)
+
+            # convert ,000,
+            #text = re.sub(",000,","",text)
 
             # convert St. to dollars 
             text = re.sub("st.","saint",text)
