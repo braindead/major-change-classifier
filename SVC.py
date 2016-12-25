@@ -307,17 +307,16 @@ class Checker():
             # remove timestamps
             text = re.sub("\[*\d:\d+:\d+.\d\]*","",text)
 
-            # convert $ to dollars 
+            # expanders
             text = re.sub("\$([\d,]+)",r"\1 dollars",text)
+            text = re.sub("st.","saint",text)
+            text = re.sub("dr.","doctor",text)
 
             # convert £ to pounds
             #text = re.sub("£([\d,]+)", r"\1 pounds",text)
 
             # convert ,000,
             #text = re.sub(",000,","",text)
-
-            # convert St. to dollars 
-            text = re.sub("st.","saint",text)
 
             # remove dashes and colons
             text = re.sub("-|:"," ",text)
