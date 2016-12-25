@@ -307,6 +307,9 @@ class Checker():
             # convert $ to dollars 
             text = re.sub(",000,","",text)
 
+            # convert St. to dollars 
+            text = re.sub("st.","saint",text)
+
             # remove dashes and colons
             text = re.sub("-|:"," ",text)
 
