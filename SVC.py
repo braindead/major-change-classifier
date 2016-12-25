@@ -162,6 +162,8 @@ class Checker():
                 "enamoured,enamored",
                 "vigour,vigor",
                 "specially,especially",
+                "two,II",
+                "three,III",
             ]
 
         self.known_majors = [
