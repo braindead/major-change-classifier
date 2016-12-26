@@ -180,6 +180,7 @@ class Checker():
                 "affective,effective",
                 "staff,stuff",
                 "juts,just",
+                "eloquently,elegantly",
             ]
 
         # metas appear within [brackets], while fillers do not
