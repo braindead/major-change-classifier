@@ -164,6 +164,7 @@ class Checker():
                 "specially,especially",
                 "two,II",
                 "three,III",
+                "practise,practice"
             ]
 
         self.known_majors = [
