@@ -182,6 +182,7 @@ class Checker():
                 "staff,stuff",
                 "juts,just",
                 "eloquently,elegantly",
+                "dominate,dominant",
             ]
 
         # metas appear within [brackets], while fillers do not
