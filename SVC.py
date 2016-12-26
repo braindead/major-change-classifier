@@ -112,6 +112,7 @@ class Checker():
             "huh",
             "all",
             "hey",
+            "you",
 
             "in",
             "it",
@@ -315,6 +316,7 @@ class Checker():
             text = re.sub("\$([\d,]+)",r"\1 dollars",text)
             text = re.sub("st.","saint",text)
             text = re.sub("dr.","doctor",text)
+            text = re.sub("(\w)\-(\w)","\1 through \2",text)
 
             # convert £ to pounds
             #text = re.sub("£([\d,]+)", r"\1 pounds",text)
