@@ -99,6 +99,7 @@ class Checker():
             "just",
             "what",
             "good",
+            "said",
 
             "the",
             "but",
@@ -113,6 +114,7 @@ class Checker():
             "all",
             "hey",
             "you",
+            "say",
 
             "in",
             "it",
@@ -165,7 +167,8 @@ class Checker():
                 "specially,especially",
                 "two,II",
                 "three,III",
-                "practise,practice"
+                "practise,practice",
+                "cause,because",
             ]
 
         self.known_majors = [
@@ -185,6 +188,7 @@ class Checker():
                 "eloquently,elegantly",
                 "dominate,dominant",
                 "plan,plough",
+                "employer,employee",
             ]
 
         # metas appear within [brackets], while fillers do not
