@@ -323,6 +323,7 @@ class Checker():
             text = re.sub("st.","saint",text)
             text = re.sub("dr.","doctor",text)
             text = re.sub("\b(\w)\-(\w)\b","\1 through \2",text)
+            text = re.sub("\bdunno\b","don't know",text)
 
             # convert £ to pounds
             #text = re.sub("£([\d,]+)", r"\1 pounds",text)
