@@ -169,6 +169,7 @@ class Checker():
                 "three,III",
                 "practise,practice",
                 "cause,because",
+                "labour,labor",
             ]
 
         self.known_majors = [
