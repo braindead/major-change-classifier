@@ -192,6 +192,10 @@ class Checker():
                 "plan,plough",
                 "employer,employee",
                 "exponential,existential",
+                "emigration,immigration",
+                "adopt,adapt",
+                "adopted,adapted",
+                "silent,siloed",
             ]
 
         # metas appear within [brackets], while fillers do not
