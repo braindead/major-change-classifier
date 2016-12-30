@@ -191,6 +191,7 @@ class Checker():
                 "dominate,dominant",
                 "plan,plough",
                 "employer,employee",
+                "exponential,existential",
             ]
 
         # metas appear within [brackets], while fillers do not
