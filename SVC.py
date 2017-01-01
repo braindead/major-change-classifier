@@ -171,6 +171,7 @@ class Checker():
                 "practise,practice",
                 "cause,because",
                 "labour,labor",
+                "hundred,100",
             ]
 
         self.known_majors = [
@@ -196,6 +197,7 @@ class Checker():
                 "adopt,adapt",
                 "adopted,adapted",
                 "silent,siloed",
+                "oldest,eldest",
             ]
 
         # metas appear within [brackets], while fillers do not
