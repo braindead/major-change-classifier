@@ -171,7 +171,6 @@ class Checker():
                 "practise,practice",
                 "cause,because",
                 "labour,labor",
-                "hundred,100",
             ]
 
         self.known_majors = [
@@ -328,8 +327,8 @@ class Checker():
 
             # expanders
             text = re.sub("\$([\d,]+)",r"\1 dollars",text)
-            text = re.sub("st.","saint",text)
-            text = re.sub("dr.","doctor",text)
+            text = re.sub("\\bst.","saint",text)
+            text = re.sub("\\bdr.","doctor",text)
             text = re.sub("\\bdunno\\b","don't know",text)
 
             # convert £ to pounds
