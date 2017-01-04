@@ -163,6 +163,7 @@ class Checker():
                 "cheques,checks",
                 "organisation,organization",
                 "defense,defence",
+                "behaviour,behavior",
                 "behavioural,behavioral",
                 "enamoured,enamored",
                 "vigour,vigor",
