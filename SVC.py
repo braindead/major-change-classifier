@@ -88,6 +88,7 @@ class Checker():
             "thank you",
             "chapter",
             "through",
+            "correct",
 
             "right",
             "alright",
@@ -326,6 +327,7 @@ class Checker():
             text = re.sub("\[*\d:\d+:\d+.\d\]*","",text)
 
             # expanders
+            text = re.sub("&",r" and ",text)
             text = re.sub("\$([\d,]+)",r"\1 dollars",text)
             text = re.sub("\\bst.","saint",text)
             text = re.sub("\\bdr.","doctor",text)
