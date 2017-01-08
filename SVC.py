@@ -161,6 +161,7 @@ class Checker():
             "vocalization"
             ]
 
+        # known minors
         self.known_minors = [
                 "can,could",
                 "cheque,check",
@@ -180,6 +181,7 @@ class Checker():
                 "cancelled,canceled",
             ]
 
+        # known majors
         self.known_majors = [
                 "advise,advice",
                 "seemless,seamless",
@@ -391,6 +393,9 @@ class Checker():
 
             # replace digits
             text = self._num_replace(text)
+
+            # special case for nineties, eighties etc
+            text = re.sub("(\w+)ty s",r"\1ties",text)
 
             # remove OOVs and extra spaces
             #clean = self._oov_clean(text)
