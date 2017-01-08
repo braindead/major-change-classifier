@@ -89,6 +89,8 @@ class Checker():
             "chapter",
             "through",
             "correct",
+            "zero",
+            "percent",
 
             "right",
             "alright",
@@ -132,9 +134,11 @@ class Checker():
             "no",
             "he",
             "do",
+            "ya",
 
             "a",
             "i",
+            "s",
 
             # speaker tracking
             "s\d+",
@@ -173,6 +177,7 @@ class Checker():
                 "practise,practice",
                 "cause,because",
                 "labour,labor",
+                "cancelled,canceled",
             ]
 
         self.known_majors = [
@@ -330,8 +335,9 @@ class Checker():
             # expanders
             text = re.sub("&",r" and ",text)
             text = re.sub("\$([\d,]+)",r"\1 dollars",text)
-            text = re.sub("\\bst.","saint",text)
-            text = re.sub("\\bdr.","doctor",text)
+            text = re.sub("\\bst\\b","saint",text)
+            text = re.sub("\\bdr\\b","doctor",text)
+            text = re.sub("\\bmt\\b","mount",text)
             text = re.sub("\\bdunno\\b","don't know",text)
 
             # convert £ to pounds
@@ -456,7 +462,7 @@ class Checker():
             except ValueError:
                 return False
 
-    def predict_json(self, json_file):
+    def predict_json(self, json_file, debug):
 
         with open(json_file) as data_file:    
             data = json.load(data_file)
@@ -467,6 +473,9 @@ class Checker():
             row = self._cleaner(row_)
 
             s1,s2 = row[0],row[1]
+
+            if debug:
+                print(row)
 
             if self.is_known_minor(row):
                 predictions.append("1")
