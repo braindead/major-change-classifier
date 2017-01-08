@@ -104,6 +104,7 @@ class Checker():
             "what",
             "good",
             "said",
+            "have",
 
             "the",
             "but",
@@ -135,6 +136,7 @@ class Checker():
             "he",
             "do",
             "ya",
+            "as",
 
             "a",
             "i",
