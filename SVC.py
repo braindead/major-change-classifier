@@ -181,6 +181,7 @@ class Checker():
                 "cause,because",
                 "labour,labor",
                 "cancelled,canceled",
+                "armor,armour",
             ]
 
         # known majors
