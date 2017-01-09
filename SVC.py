@@ -183,6 +183,7 @@ class Checker():
                 "labour,labor",
                 "cancelled,canceled",
                 "armor,armour",
+                "recognised,recognized",
             ]
 
         # known majors
