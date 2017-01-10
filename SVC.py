@@ -184,6 +184,9 @@ class Checker():
                 "cancelled,canceled",
                 "armor,armour",
                 "recognised,recognized",
+                "neighbour,neighbor",
+                "acknowledgement,acknowledgment",
+                "saviour,savior",
             ]
 
         # known majors
