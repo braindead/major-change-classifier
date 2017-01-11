@@ -214,6 +214,7 @@ class Checker():
                 "adopted,adapted",
                 "silent,siloed",
                 "oldest,eldest",
+                "giant,gigantic",
             ]
 
         # metas appear within [brackets], while fillers do not
