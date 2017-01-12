@@ -188,6 +188,7 @@ class Checker():
                 "acknowledgement,acknowledgment",
                 "saviour,savior",
                 "practising,practicing",
+                "practised,practiced",
             ]
 
         # known majors
