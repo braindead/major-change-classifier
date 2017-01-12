@@ -187,6 +187,7 @@ class Checker():
                 "neighbour,neighbor",
                 "acknowledgement,acknowledgment",
                 "saviour,savior",
+                "practising,practicing",
             ]
 
         # known majors
