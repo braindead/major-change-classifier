@@ -397,7 +397,7 @@ class Checker():
             text = re.sub("(\d*)(1st)","\g<1>0 first",text)
             text = re.sub("(\d*)(2nd)","\g<1>0 second",text)
             text = re.sub("(\d*)(3rd)","\g<1>0 third",text)
-            text = re.sub("(\d+)(th)","\g<1>",text)
+            #text = re.sub("(\d+)(th)","\g<1>",text)
 
             # remove fillers
             text = re.sub(self._fillers,"",text)
