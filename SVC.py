@@ -502,6 +502,10 @@ class Checker():
             if debug:
                 print(row)
 
+            if s1 == "" and s2 == "":
+                predictions.append("1")
+                continue
+
             if self.is_known_minor(row):
                 predictions.append("1")
                 continue
