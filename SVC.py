@@ -106,6 +106,7 @@ class Checker():
             "good",
             "said",
             "have",
+            "nope",
 
             "the",
             "but",
@@ -415,7 +416,9 @@ class Checker():
             # remove OOVs and extra spaces
             #clean = self._oov_clean(text)
 
-            cleaned.append(text)
+            text = re.sub("\s+", ' ', text)
+
+            cleaned.append(text.strip())
 
         return cleaned
 
