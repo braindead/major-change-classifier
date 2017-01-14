@@ -139,6 +139,8 @@ class Checker():
             "do",
             "ya",
             "as",
+            "ah",
+            "aw",
 
             "a",
             "i",
