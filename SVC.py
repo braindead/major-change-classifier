@@ -353,6 +353,7 @@ class Checker():
             text = re.sub("\\bdr\\b","doctor",text)
             text = re.sub("\\bmt\\b","mount",text)
             text = re.sub("\\bmr\\b","mister",text)
+            text = re.sub("\\bjr\\b","junior",text)
             text = re.sub("\\bdunno\\b","don't know",text)
 
             # convert £ to pounds
