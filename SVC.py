@@ -92,6 +92,7 @@ class Checker():
             "zero",
             "percent",
             "verse",
+            "of course",
 
             "right",
             "alright",
