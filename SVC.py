@@ -199,6 +199,7 @@ class Checker():
                 "first,one",
                 "second,two",
                 "third,three",
+                "travelling,traveling",
             ]
 
         # known majors
@@ -228,6 +229,7 @@ class Checker():
                 "oldest,eldest",
                 "giant,gigantic",
                 "definately,definitely",
+                "the stress,distress",
             ]
 
         # metas appear within [brackets], while fillers do not
