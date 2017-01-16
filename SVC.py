@@ -93,6 +93,7 @@ class Checker():
             "percent",
             "verse",
             "of course",
+            "dollars",
 
             "right",
             "alright",
