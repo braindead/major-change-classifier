@@ -193,6 +193,9 @@ class Checker():
                 "saviour,savior",
                 "practising,practicing",
                 "practised,practiced",
+                "first,one",
+                "second,two",
+                "third,three",
             ]
 
         # known majors
@@ -413,13 +416,19 @@ class Checker():
             # replace digits
             text = self._num_replace(text)
 
+            text = re.sub("\s+", ' ', text)
+
             # special case for nineties, eighties etc
             text = re.sub("(\w+)ty s",r"\1ties",text)
+            
+            # case for ten s
+            text = re.sub("ten s$", r"tens", text)
+
+            # case for hunderds and thousands
+            text = re.sub("one (hundred|thousand) s$", r"\1s", text)
 
             # remove OOVs and extra spaces
             #clean = self._oov_clean(text)
-
-            text = re.sub("\s+", ' ', text)
 
             cleaned.append(text.strip())
 
