@@ -124,6 +124,8 @@ class Checker():
             "hey",
             "you",
             "say",
+            "yay",
+            "yey",
 
             "in",
             "it",
