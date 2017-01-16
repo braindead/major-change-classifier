@@ -200,6 +200,7 @@ class Checker():
                 "second,two",
                 "third,three",
                 "travelling,traveling",
+                "savouring,savoring",
             ]
 
         # known majors
