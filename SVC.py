@@ -93,7 +93,7 @@ class Checker():
             "percent",
             "verse",
             "of course",
-            "dollars",
+            "dollars?",
 
             "right",
             "alright",
@@ -174,36 +174,6 @@ class Checker():
         # known minors
         self.known_minors = [
                 "can,could",
-                "cheque,check",
-                "cheques,checks",
-                "organisation,organization",
-                "defense,defence",
-                "behaviour,behavior",
-                "behavioural,behavioral",
-                "enamoured,enamored",
-                "vigour,vigor",
-                "specially,especially",
-                "two,II",
-                "three,III",
-                "practise,practice",
-                "cause,because",
-                "labour,labor",
-                "cancelled,canceled",
-                "armor,armour",
-                "recognised,recognized",
-                "neighbour,neighbor",
-                "acknowledgement,acknowledgment",
-                "saviour,savior",
-                "practising,practicing",
-                "practised,practiced",
-                "first,one",
-                "second,two",
-                "third,three",
-                "travelling,traveling",
-                "savouring,savoring",
-                "cataloguing,cataloging",
-                "catalogues,catalogs",
-                "catalogue,catalog",
             ]
 
         # known majors
@@ -371,6 +341,34 @@ class Checker():
             text = re.sub("\\bmr\\b","mister",text)
             text = re.sub("\\bjr\\b","junior",text)
             text = re.sub("\\bdunno\\b","don't know",text)
+
+            # subtitutions
+            text = re.sub("\\bcheque", "check", text);
+            text = re.sub("\\borganisation", "organization", text);
+            text = re.sub("\\bdefense", "defence", text);
+            text = re.sub("\\bbehaviour", "behavior", text);
+            text = re.sub("\\benamour", "enamor", text);
+            text = re.sub("\\bvigour", "vigor", text);
+            text = re.sub("\\bespecially", "specially", text);
+            text = re.sub("\\bII\\b", "two", text);
+            text = re.sub("\\bIII\\b", "three", text);
+            text = re.sub("\\bpractis", "practic", text);
+            text = re.sub("\\bcause", "because", text);
+            text = re.sub("\\blabour", "labor", text);
+            text = re.sub("\\bcancell", "cancel", text);
+            text = re.sub("\\barmour", "armor", text);
+            text = re.sub("\\brecognise", "recognize", text);
+            text = re.sub("\\bneighbour", "neighbor", text);
+            text = re.sub("\\backnowledgement\\b", "acknowledgment", text);
+            text = re.sub("\\bsaviour", "savior", text);
+            text = re.sub("\\bfirst\\b", "one", text);
+            text = re.sub("\\bsecond\\b", "two", text);
+            text = re.sub("\\bthird\\b", "three", text);
+            text = re.sub("\\btravell", "travel", text);
+            text = re.sub("\\btravell", "travel", text);
+            text = re.sub("\\bsavour", "savor", text);
+            text = re.sub("\\bcatalogue", "catalog", text);
+            text = re.sub("\\bcataloguing", "cataloging", text);
 
             # convert £ to pounds
             #text = re.sub("£([\d,]+)", r"\1 pounds",text)
