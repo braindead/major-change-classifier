@@ -201,6 +201,8 @@ class Checker():
                 "third,three",
                 "travelling,traveling",
                 "savouring,savoring",
+                "cataloguing,cataloging",
+                "catalogues,catalogs",
             ]
 
         # known majors
