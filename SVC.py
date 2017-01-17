@@ -203,6 +203,7 @@ class Checker():
                 "savouring,savoring",
                 "cataloguing,cataloging",
                 "catalogues,catalogs",
+                "catalogue,catalog",
             ]
 
         # known majors
