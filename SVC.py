@@ -418,6 +418,7 @@ class Checker():
             text = re.sub("\\btravell", "travel", text);
             text = re.sub("\\bcatalogue?", "catalog", text);
             text = re.sub("\\bcentre\\b", "center", text);
+            text = re.sub("\\blbs\\b", "pounds", text);
 
             # remove fillers
             text = re.sub(self._fillers,"",text)
