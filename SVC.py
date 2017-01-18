@@ -174,6 +174,7 @@ class Checker():
         # known minors
         self.known_minors = [
                 "can,could",
+                "have,had",
             ]
 
         # known majors
