@@ -368,6 +368,7 @@ class Checker():
             text = re.sub("\\bthird\\b", "three", text);
             text = re.sub("\\btravell", "travel", text);
             text = re.sub("\\bcatalogue?", "catalog", text);
+            text = re.sub("\\bcentre\\b", "center", text);
 
             # convert £ to pounds
             #text = re.sub("£([\d,]+)", r"\1 pounds",text)
