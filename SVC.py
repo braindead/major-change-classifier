@@ -342,6 +342,7 @@ class Checker():
             text = re.sub("\\bmr\\b","mister",text)
             text = re.sub("\\bjr\\b","junior",text)
             text = re.sub("\\bdunno\\b","don't know",text)
+            text = re.sub("(\d+)\.(\d+)",r"\1 point \2",text)
 
             # convert £ to pounds
             #text = re.sub("£([\d,]+)", r"\1 pounds",text)
@@ -417,7 +418,6 @@ class Checker():
             text = re.sub("\\btravell", "travel", text);
             text = re.sub("\\bcatalogue?", "catalog", text);
             text = re.sub("\\bcentre\\b", "center", text);
-
 
             # remove fillers
             text = re.sub(self._fillers,"",text)
