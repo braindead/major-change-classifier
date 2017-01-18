@@ -175,6 +175,7 @@ class Checker():
         self.known_minors = [
                 "can,could",
                 "have,had",
+                "approach,approached",
             ]
 
         # known majors
