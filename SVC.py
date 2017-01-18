@@ -430,7 +430,7 @@ class Checker():
             text = re.sub("\s+", ' ', text)
 
             # special case for nineties, eighties etc
-            text = re.sub("(\w+)ty s",r"\1ties",text)
+            text = re.sub("(\w+)ty s\\b",r"\1ties",text)
             
             # case for ten s
             text = re.sub("ten s$", r"tens", text)
