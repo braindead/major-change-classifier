@@ -179,6 +179,7 @@ class Checker():
                 "can,could",
                 "have,had",
                 "approach,approached",
+                "jenna,jana",
             ]
 
         # known majors
