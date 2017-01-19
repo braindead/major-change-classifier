@@ -72,11 +72,7 @@ class Checker():
             "i guess",
             "i mean",
             "i think",
-            "kinda",
             "kind of",
-            "like",
-            "really",
-            "sorta",
             "sort of",
             "you know",
             "i don't know",
@@ -86,18 +82,25 @@ class Checker():
             "that's good",
             "quote unquote",
             "thank you",
-            "chapter",
-            "through",
-            "correct",
-            "zero",
-            "percent",
-            "verse",
             "of course",
             "dollars?",
 
-            "right",
             "alright",
+            "correct",
+            "percent",
+            "chapter",
+            "through",
 
+            "really",
+
+            "right",
+            "there",
+            "sorta",
+            "kinda",
+
+            "like",
+            "zero",
+            "verse",
             "yeah",
             "well",
             "this",
@@ -420,6 +423,7 @@ class Checker():
             text = re.sub("\\bcatalogue?", "catalog", text);
             text = re.sub("\\bcentre\\b", "center", text);
             text = re.sub("\\blbs\\b", "pounds", text);
+            text = re.sub("\\bauth\\b", "authentication", text);
 
             # remove fillers
             text = re.sub(self._fillers,"",text)
