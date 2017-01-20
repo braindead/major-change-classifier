@@ -366,9 +366,9 @@ class Checker():
 
             ### whether or not to keep \\b depends on whether or not there are single quotes in the text ###
             text = re.sub("'til{1,2}\\b","until",text) #
-            text = re.sub("'em","them",text) #
-            text = re.sub("'cause","because",text) #
-            text = re.sub("\\bsorta\\b","sort of",text) #
+            text = re.sub("'em\\b","them",text) #
+            text = re.sub("'cause\\b","because",text) #
+            text = re.sub("'bout\\b","about",text) #
             text = re.sub(r"(\w+)in'",r"\1ing",text) #
 
             # british spellings that are OOV
@@ -425,6 +425,7 @@ class Checker():
             text = re.sub("\\bcentre\\b", "center", text);
             text = re.sub("\\blbs\\b", "pounds", text);
             text = re.sub("\\bauth\\b", "authentication", text);
+            text = re.sub("\\bsorta\\b","sort of",text) #
 
             # remove fillers
             text = re.sub(self._fillers,"",text)
