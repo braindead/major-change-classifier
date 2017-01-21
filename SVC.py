@@ -427,6 +427,7 @@ class Checker():
             text = re.sub("\\blbs\\b", "pounds", text);
             text = re.sub("\\bauth\\b", "authentication", text);
             text = re.sub("\\bsorta\\b","sort of",text) #
+            text = re.sub("\\bIL\\b","Illinois",text) #
 
             # remove fillers
             text = re.sub(self._fillers,"",text)
