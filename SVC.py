@@ -210,6 +210,7 @@ class Checker():
                 "giant,gigantic",
                 "definately,definitely",
                 "the stress,distress",
+                "obtain,attain",
             ]
 
         # metas appear within [brackets], while fillers do not
