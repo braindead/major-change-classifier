@@ -418,6 +418,8 @@ class Checker():
             text = re.sub("\\bcause", "because", text);
             text = re.sub("\\bcancell", "cancel", text);
             text = re.sub("\\brecognise", "recognize", text);
+            text = re.sub("\\brealised", "realized", text);
+            text = re.sub("\\bsensitise", "sensitize", text);
             text = re.sub("gement\\b", "gment", text);
             text = re.sub("\\bfirst\\b", "one", text);
             text = re.sub("\\bsecond\\b", "two", text);
