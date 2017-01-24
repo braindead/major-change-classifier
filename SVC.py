@@ -180,6 +180,7 @@ class Checker():
                 "have,had",
                 "approach,approached",
                 "jenna,jana",
+                "background,overlapping",
             ]
 
         # known majors
