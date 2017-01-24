@@ -95,6 +95,7 @@ class Checker():
 
             "right",
             "there",
+            "their",
             "sorta",
             "kinda",
 
