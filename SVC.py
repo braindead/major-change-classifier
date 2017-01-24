@@ -418,9 +418,9 @@ class Checker():
             text = re.sub("\\bpractis", "practic", text);
             text = re.sub("\\bcause", "because", text);
             text = re.sub("\\bcancell", "cancel", text);
-            text = re.sub("\\brecognise", "recognize", text);
-            text = re.sub("\\brealised", "realized", text);
-            text = re.sub("\\bsensitise", "sensitize", text);
+            text = re.sub("\\brecognis(e|i)", r"recogniz\1", text);
+            text = re.sub("\\brealis(e|i)", r"realiz\1", text);
+            text = re.sub("\\bsensitis(e|i)", r"sensitiz\1", text);
             text = re.sub("gement\\b", "gment", text);
             text = re.sub("\\bfirst\\b", "one", text);
             text = re.sub("\\bsecond\\b", "two", text);
