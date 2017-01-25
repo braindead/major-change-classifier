@@ -98,6 +98,7 @@ class Checker():
             "their",
             "sorta",
             "kinda",
+            "liked",
 
             "like",
             "zero",
