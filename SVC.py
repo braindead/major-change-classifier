@@ -423,7 +423,7 @@ class Checker():
             text = re.sub("\\brecognis(e|i)", r"recogniz\1", text);
             text = re.sub("\\brealis(e|i)", r"realiz\1", text);
             text = re.sub("\\bsensitis(e|i)", r"sensitiz\1", text);
-            text = re.sub("gement(s)?\\b", r"gment\1", text);
+            text = re.sub("gement", "gment", text);
             text = re.sub("\\bfirst\\b", "one", text);
             text = re.sub("\\bsecond\\b", "two", text);
             text = re.sub("\\bthird\\b", "three", text);
