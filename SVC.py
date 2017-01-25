@@ -413,6 +413,7 @@ class Checker():
             text = re.sub("\\bsavour", "savor", text);
             text = re.sub("\\bneighbour", "neighbor", text);
             text = re.sub("\\bparlour", "parlor", text);
+            text = re.sub("\\bhonour", "honor", text);
             text = re.sub("\\bespecially", "specially", text);
             text = re.sub("\\bII\\b", "two", text);
             text = re.sub("\\bIII\\b", "three", text);
