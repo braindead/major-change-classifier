@@ -131,6 +131,7 @@ class Checker():
             "say",
             "yay",
             "yey",
+            "had",
 
             "in",
             "it",
