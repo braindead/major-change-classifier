@@ -182,7 +182,10 @@ class Checker():
                 "have,had",
                 "approach,approached",
                 "jenna,jana",
+                "tom,todd",
                 "background,overlapping",
+                "tens,ten",
+                "engagements,engagement"
             ]
 
         # known majors
