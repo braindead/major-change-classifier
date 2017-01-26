@@ -415,6 +415,7 @@ class Checker():
             text = re.sub("\\blabour", "labor", text);
             text = re.sub("\\bvigour", "vigor", text);
             text = re.sub("\\barmour", "armor", text);
+            text = re.sub("\\bcolour", "color", text);
             text = re.sub("\\bsaviour", "savior", text);
             text = re.sub("\\bsavour", "savor", text);
             text = re.sub("\\bneighbour", "neighbor", text);
