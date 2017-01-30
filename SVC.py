@@ -99,6 +99,7 @@ class Checker():
             "sorta",
             "kinda",
             "liked",
+            "could",
 
             "like",
             "zero",
@@ -134,7 +135,7 @@ class Checker():
             "had",
             "any",
             "can",
-            "may"
+            "may",
 
             "in",
             "it",
@@ -154,6 +155,7 @@ class Checker():
             "as",
             "ah",
             "aw",
+            "at",
 
             "a",
             "i",
