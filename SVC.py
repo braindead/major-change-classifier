@@ -115,6 +115,7 @@ class Checker():
             "said",
             "have",
             "nope",
+            "then",
 
             "the",
             "but",
