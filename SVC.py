@@ -430,11 +430,9 @@ class Checker():
             text = re.sub("\\bparlour", "parlor", text);
             text = re.sub("\\bhonour", "honor", text);
             text = re.sub("\\bespecially", "specially", text);
-            text = re.sub("\\bII\\b", "two", text);
-            text = re.sub("\\bIII\\b", "three", text);
             text = re.sub("\\bpractis", "practic", text);
             text = re.sub("\\bcause", "because", text);
-            text = re.sub("\\bcancell", "cancel", text);
+            text = re.sub("lled\\b", "led", text);
             text = re.sub("\\brecognis(e|i)", r"recogniz\1", text);
             text = re.sub("\\brealis(e|i)", r"realiz\1", text);
             text = re.sub("\\bsensitis(e|i)", r"sensitiz\1", text);
@@ -448,7 +446,15 @@ class Checker():
             text = re.sub("\\blbs\\b", "pounds", text);
             text = re.sub("\\bauth\\b", "authentication", text);
             text = re.sub("\\bsorta\\b","sort of",text) #
+
+            # states
             text = re.sub("\\bIL\\b","Illinois",text) #
+
+            # roman numerals
+            text = re.sub("\\bII\\b", "two", text);
+            text = re.sub("\\bIII\\b", "three", text);
+            text = re.sub("\\bVII\\b", "seven", text);
+            text = re.sub("\\bVIII\\b", "eight", text);
 
             # remove fillers
             text = re.sub(self._fillers,"",text)
