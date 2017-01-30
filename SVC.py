@@ -1361,6 +1361,7 @@ class Checker():
             text = re.sub("\\bhonour", "honor", text);
             text = re.sub("\\bespecially", "specially", text);
             text = re.sub("\\bpractis", "practic", text);
+            text = re.sub("\\boptimise", "optimize", text);
             text = re.sub("\\bcause", "because", text);
             text = re.sub("lled\\b", "led", text);
             text = re.sub("\\brecognis(e|i)", r"recogniz\1", text);
