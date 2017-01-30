@@ -1382,10 +1382,10 @@ class Checker():
             text = re.sub("\\bIL\\b","Illinois",text) #
 
             # roman numerals
-            text = re.sub("\\bII\\b", "two", text);
-            text = re.sub("\\bIII\\b", "three", text);
-            text = re.sub("\\bVII\\b", "seven", text);
-            text = re.sub("\\bVIII\\b", "eight", text);
+            text = re.sub("\\bii\\b", "two", text);
+            text = re.sub("\\biii\\b", "three", text);
+            text = re.sub("\\bvii\\b", "seven", text);
+            text = re.sub("\\bviii\\b", "eight", text);
 
             # remove fillers
             text = re.sub(self._fillers,"",text)
