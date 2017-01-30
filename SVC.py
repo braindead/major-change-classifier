@@ -133,6 +133,8 @@ class Checker():
             "yey",
             "had",
             "any",
+            "can",
+            "may"
 
             "in",
             "it",
