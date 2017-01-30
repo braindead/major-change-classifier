@@ -1157,6 +1157,7 @@ class Checker():
                 "obtain,attain",
                 "toe,to",
                 "weighing,weighting",
+                "fiscal,",
             ]
 
         # metas appear within [brackets], while fillers do not
