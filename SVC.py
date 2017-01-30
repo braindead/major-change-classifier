@@ -50,6 +50,8 @@ class Checker():
             vocab_list = map(lambda string: string.strip(), f.readlines())
         self.vocab_dict = {w: i for i, w in enumerate(vocab_list)}
 
+        self.extended_fillers = False
+
         # filler words that will be removed (regex)
         fillers = [
             "uh+",
@@ -67,8 +69,10 @@ class Checker():
             "m+ hm+",
 
             "all right",
+            "actually",
+            "basically",
+            "i guess",
             "i mean",
-            "i will",
             "i think",
             "kind of",
             "sort of",
@@ -79,13 +83,132 @@ class Checker():
             "so to speak",
             "that's good",
             "quote unquote",
-            "thanks",
             "thank you",
             "of course",
             "dollars?",
-            "i am",
 
+            "alright",
+            "correct",
+            "percent",
+            "chapter",
+            "through",
+            "thought",
+
+            "really",
+
+            "would",
+            "right",
+            "there",
+            "their",
+            "sorta",
+            "kinda",
+            "liked",
+            "could",
+            "their",
+            "about",
+
+            "your",
+            "like",
+            "zero",
+            "verse",
+            "yeah",
+            "well",
+            "this",
+            "that",
+            "okay",
+            "just",
+            "what",
+            "good",
+            "said",
+            "have",
+            "nope",
+            "then",
+            "blah",
+            "with",
+            "from",
+
+            "the",
+            "but",
+            "yes",
+            "yup",
+            "yep",
+            "and",
+            "did",
+            "wow",
+            "was",
+            "huh",
+            "all",
+            "hey",
+            "you",
+            "say",
+            "yay",
+            "yey",
+            "had",
+            "any",
+            "can",
+            "may",
+            "now",
+
+            "in",
+            "it",
+            "of",
+            "on",
+            "or",
+            "so",
+            "to",
+            "an",
+            "am",
+            "is",
+            "if",
+            "no",
+            "he",
+            "do",
+            "ya",
+            "as",
+            "ah",
+            "aw",
+            "at",
+
+            "a",
+            "i",
+            "s",
+
+            # speaker tracking
+            "s\d+",
+            ]
+
+        metas = [
+            "applause",
+            "automated voice",
+            "background conversation",
+            "chuckle",
+            "end paren",
+            "foreign language",
+            "laughter",
+            "music",
+            "noise",
+            "overlapping conversation",
+            "pause",
+            "start paren",
+            "video playback",
+            "vocalization"
+            ]
+
+        # known minors
+        self.known_minors = [
+                "can,could",
+                "have,had",
+                "approach,approached",
+                "jenna,jana",
+                "tom,todd",
+                "background,overlapping",
+                "tens,ten",
+                "engagements,engagement"
+            ]
+
+        top_1000 = [
             "infrastructure",
+
             "understanding",
             "relationships",
             "organizations",
@@ -1088,42 +1211,6 @@ class Checker():
             "up",
             "we",
             "ya",
-
-            "a",
-            "i",
-            "s",
-
-            # speaker tracking
-            "s\d+",
-            ]
-
-        metas = [
-            "applause",
-            "automated voice",
-            "background conversation",
-            "chuckle",
-            "end paren",
-            "foreign language",
-            "laughter",
-            "music",
-            "noise",
-            "overlapping conversation",
-            "pause",
-            "start paren",
-            "video playback",
-            "vocalization"
-            ]
-
-        # known minors
-        self.known_minors = [
-                "can,could",
-                "have,had",
-                "approach,approached",
-                "jenna,jana",
-                "tom,todd",
-                "background,overlapping",
-                "tens,ten",
-                "engagements,engagement"
             ]
 
         # known majors
@@ -1157,13 +1244,16 @@ class Checker():
                 "obtain,attain",
                 "toe,to",
                 "weighing,weighting",
-                "fiscal,",
+                "comfort,comfortable",
+                "end switch,switch",
+                "module,modbus",
+                "drawn,drilled",
             ]
 
         # metas appear within [brackets], while fillers do not
         self._fillers = "\\b"+"\\b|\\b".join(fillers)+"\\b"
+        self._top_1000 = "\\b"+"\\b|\\b".join(top_1000)+"\\b"
         self._metas = "\["+"\]|\[".join(metas)+"\]"
-
 
     def _indexer(self,string1,string2):
         """Get the summed index differences between the two strings, where the
@@ -1362,7 +1452,7 @@ class Checker():
             text = re.sub("\\bhonour", "honor", text);
             text = re.sub("\\bespecially", "specially", text);
             text = re.sub("\\bpractis", "practic", text);
-            text = re.sub("\\boptimise", "optimize", text);
+            text = re.sub("\\boptimis", "optimiz", text);
             text = re.sub("\\bcause", "because", text);
             text = re.sub("lled\\b", "led", text);
             text = re.sub("\\brecognis(e|i)", r"recogniz\1", text);
@@ -1378,7 +1468,6 @@ class Checker():
             text = re.sub("\\blbs\\b", "pounds", text);
             text = re.sub("\\bauth\\b", "authentication", text);
             text = re.sub("\\bsorta\\b","sort of",text) #
-            text = re.sub("\\blotta\\b","lot of",text) #
 
             # states
             text = re.sub("\\bIL\\b","Illinois",text) #
@@ -1391,6 +1480,9 @@ class Checker():
 
             # remove fillers
             text = re.sub(self._fillers,"",text)
+
+            if self.extended_fillers:
+                text = re.sub(self._top_1000,"",text)
 
             # replace digits
             text = self._num_replace(text)
@@ -1476,10 +1568,12 @@ class Checker():
             except ValueError:
                 return False
 
-    def predict_json(self, json_file, debug):
+    def predict_json(self, json_file, extended_fillers, debug):
 
         with open(json_file) as data_file:    
             data = json.load(data_file)
+
+        self.extended_fillers = extended_fillers
 
         predictions = []
 
