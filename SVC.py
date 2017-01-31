@@ -217,7 +217,11 @@ class Checker():
                 "margin,marginal",
                 "xyz,x y z",
                 "louise,wheeze",
-                "supplemented,supplements"
+                "supplemented,supplements",
+                "kris,chris",
+                "marc,mark",
+                "monroe,munro",
+                "woo,whoo",
             ]
 
         top_1000 = [
@@ -1467,6 +1471,7 @@ class Checker():
             text = re.sub("\\bvigour", "vigor", text);
             text = re.sub("\\barmour", "armor", text);
             text = re.sub("\\bcolour", "color", text);
+            text = re.sub("\\bwatercolour", "watercolor", text);
             text = re.sub("\\bsaviour", "savior", text);
             text = re.sub("\\bsavour", "savor", text);
             text = re.sub("\\bneighbour", "neighbor", text);
@@ -1490,10 +1495,11 @@ class Checker():
             text = re.sub("\\bcentre\\b", "center", text);
             text = re.sub("\\blbs\\b", "pounds", text);
             text = re.sub("\\bauth\\b", "authentication", text);
-            text = re.sub("\\bsorta\\b","sort of",text) #
-            text = re.sub("\\bmould\\b","mold",text) #
-            text = re.sub("\\bmid\\b","middle",text) #
-            text = re.sub("\\blab\\b","laboratory",text) #
+            text = re.sub("\\bsorta\\b", "sort of",text) #
+            text = re.sub("\\bmould\\b", "mold",text) #
+            text = re.sub("\\bmid\\b", "middle",text) #
+            text = re.sub("\\blab\\b", "laboratory",text) #
+            text = re.sub("\\bformulae\\b", "formula", text) #
 
             # states
             text = re.sub("\\bIL\\b","Illinois",text) #
