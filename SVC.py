@@ -4712,6 +4712,7 @@ class Checker():
             text = re.sub("\\bpractis", "practic", text);
             text = re.sub("\\boptimis", "optimiz", text);
             text = re.sub("\\butilis", "utiliz", text);
+            text = re.sub("\\bemphasis", "emphasiz", text);
             text = re.sub("\\bcause", "because", text);
             text = re.sub("\\btravelled\\b", "traveled", text);
             text = re.sub("\\bcancelled\\b", "canceled", text);
