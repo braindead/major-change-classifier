@@ -68,6 +68,8 @@ class Checker():
             "uh huh",
             "m+ hm+",
 
+            "let me say",
+            "let me",
             "all right",
             "actually",
             "basically",
@@ -102,11 +104,13 @@ class Checker():
             "their",
             "sorta",
             "kinda",
+            "gonna",
             "liked",
             "could",
             "their",
             "about",
 
+            "fact",
             "your",
             "like",
             "zero",
@@ -126,6 +130,7 @@ class Checker():
             "blah",
             "with",
             "from",
+            "call",
 
             "the",
             "but",
@@ -168,10 +173,13 @@ class Checker():
             "ah",
             "aw",
             "at",
+            "eh",
+            "da",
 
             "a",
             "i",
             "s",
+            "d",
 
             # speaker tracking
             "s\d+",
@@ -203,7 +211,13 @@ class Checker():
                 "tom,todd",
                 "background,overlapping",
                 "tens,ten",
-                "engagements,engagement"
+                "engagements,engagement",
+                "claire,cora",
+                "frana,farina",
+                "margin,marginal",
+                "xyz,x y z",
+                "louise,wheeze",
+                "supplemented,supplements"
             ]
 
         top_1000 = [
@@ -473,7 +487,6 @@ class Checker():
             "meeting",
             "members",
             "message",
-            "million",
             "minutes",
             "morning",
             "network",
@@ -666,7 +679,6 @@ class Checker():
             "taking",
             "talked",
             "things",
-            "though",
             "travel",
             "trying",
             "turned",
@@ -1201,6 +1213,7 @@ class Checker():
             "in",
             "is",
             "it",
+            "me",
             "my",
             "no",
             "of",
@@ -1250,9 +1263,17 @@ class Checker():
                 "drawn,drilled",
             ]
 
+        def variants(word):
+            return "|".join([
+                "\\b" + word + "\\b", 
+                "\\b" + word + "s\\b", 
+                "\\b" + word + "d?\\b", 
+                "\\b" + word + "ed\\b"
+                ])
+
         # metas appear within [brackets], while fillers do not
-        self._fillers = "\\b"+"\\b|\\b".join(fillers)+"\\b"
-        self._top_1000 = "\\b"+"\\b|\\b".join(top_1000)+"\\b"
+        self._fillers = "\\b" + "|".join(map(variants, fillers)) + "\\b"
+        self._top_1000 = "\\b" + "|".join(map(variants, top_1000)) + "\\b"
         self._metas = "\["+"\]|\[".join(metas)+"\]"
 
     def _indexer(self,string1,string2):
@@ -1387,6 +1408,7 @@ class Checker():
             text = re.sub("\\bjr\\b","junior",text)
             text = re.sub("\\bdunno\\b","don't know",text)
             text = re.sub("(\d+)\.(\d+)",r"\1 point \2",text)
+            text = re.sub("1\/",r"",text)
 
             # convert £ to pounds
             #text = re.sub("£([\d,]+)", r"\1 pounds",text)
@@ -1454,7 +1476,8 @@ class Checker():
             text = re.sub("\\bpractis", "practic", text);
             text = re.sub("\\boptimis", "optimiz", text);
             text = re.sub("\\bcause", "because", text);
-            text = re.sub("lled\\b", "led", text);
+            text = re.sub("\\btravelled\\b", "traveled", text);
+            text = re.sub("\\bcancelled\\b", "canceled", text);
             text = re.sub("\\brecognis(e|i)", r"recogniz\1", text);
             text = re.sub("\\brealis(e|i)", r"realiz\1", text);
             text = re.sub("\\bsensitis(e|i)", r"sensitiz\1", text);
@@ -1468,6 +1491,9 @@ class Checker():
             text = re.sub("\\blbs\\b", "pounds", text);
             text = re.sub("\\bauth\\b", "authentication", text);
             text = re.sub("\\bsorta\\b","sort of",text) #
+            text = re.sub("\\bmould\\b","mold",text) #
+            text = re.sub("\\bmid\\b","middle",text) #
+            text = re.sub("\\blab\\b","laboratory",text) #
 
             # states
             text = re.sub("\\bIL\\b","Illinois",text) #
@@ -1478,11 +1504,11 @@ class Checker():
             text = re.sub("\\bvii\\b", "seven", text);
             text = re.sub("\\bviii\\b", "eight", text);
 
-            # remove fillers
-            text = re.sub(self._fillers,"",text)
-
             if self.extended_fillers:
                 text = re.sub(self._top_1000,"",text)
+
+            # remove fillers
+            text = re.sub(self._fillers,"",text)
 
             # replace digits
             text = self._num_replace(text)
