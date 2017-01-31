@@ -4494,6 +4494,7 @@ class Checker():
                 "end switch,switch",
                 "module,modbus",
                 "drawn,drilled",
+                "disbursed,dispersed",
             ]
 
         def variants(word):
@@ -4734,6 +4735,7 @@ class Checker():
             text = re.sub("\\blab\\b", "laboratory",text) #
             text = re.sub("\\bformulae\\b", "formula", text) #
             text = re.sub("\\bpkwy\\b", "parkway", text) #
+            text = re.sub("\\brd\\b", "road", text) #
             text = re.sub("\\benroll", "enrol", text) #
             text = re.sub("\\bjenn", "jen", text) #
 
