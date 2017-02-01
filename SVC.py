@@ -641,7 +641,6 @@ class Checker():
             "frank",
             "logan",
             "owen",
-            "bass",
             "marsh",
             "drake",
             "wong",
