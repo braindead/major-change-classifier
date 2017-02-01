@@ -133,6 +133,7 @@ class Checker():
             "with",
             "from",
             "call",
+            "were",
 
             "has",
             "had",
@@ -4841,9 +4842,9 @@ class Checker():
         predictions = []
         s1 = s2 = ""
 
-        def save(p, row):
+        def save(p, r):
             if debug is True:
-                print p + "\t" + ",".join(row) + "\t" + ",".join([s1, s2])
+                print p + "\t" + ",".join(r) + "\t" + ",".join([s1, s2])
             else:
                 predictions.append(p)
 
@@ -4858,15 +4859,15 @@ class Checker():
             s1,s2 = row[0],row[1]
 
             if s1 == "" and s2 == "":
-                save("1", row)
+                save("1", row_)
                 continue
 
             if self.is_known_minor(row):
-                save("1", row)
+                save("1", row_)
                 continue
 
             if self.is_known_major(row):
-                save("2", row)
+                save("2", row_)
                 continue
 
             s1 = self._oov_clean(s1)
@@ -4874,16 +4875,16 @@ class Checker():
 
             # complete deletions are considered minor
             if s2 == "":
-                save("1", row)
+                save("1", row_)
                 continue
 
             # insertions are considered major
             if s1 == "":
-                save("2", row)
+                save("2", row_)
                 continue
 
             # predict based on the trained SVC
-            save(str(self.model.predict(self._generate(s1,s2))[0]), row)
+            save(str(self.model.predict(self._generate(s1,s2))[0]), row_)
 
         if debug is False:
             print(json.dumps(predictions))
