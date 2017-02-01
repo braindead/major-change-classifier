@@ -1188,6 +1188,7 @@ class Checker():
             "vang",
 
             # male first names
+            "muhammad",
             "aaron",
             "abdul",
             "abe",
@@ -3451,6 +3452,7 @@ class Checker():
                 "woo,whoo",
                 "munro,",
                 "wheeze,",
+                "ren,",
             ]
 
         top_1000 = [
@@ -4495,6 +4497,7 @@ class Checker():
                 "module,modbus",
                 "drawn,drilled",
                 "disbursed,dispersed",
+                "research,researcher",
             ]
 
         def variants(word):
