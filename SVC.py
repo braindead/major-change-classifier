@@ -4500,6 +4500,8 @@ class Checker():
                 "drawn,drilled",
                 "disbursed,dispersed",
                 "research,researcher",
+                "religious,",
+                "new money,make money",
             ]
 
         def variants(word):
@@ -4735,7 +4737,6 @@ class Checker():
             text = re.sub("\\blbs\\b", "pounds", text);
             text = re.sub("\\bauth\\b", "authentication", text);
             text = re.sub("\\bsorta\\b", "sort of",text) #
-            text = re.sub("\\bmould\\b", "mold",text) #
             text = re.sub("\\bmid\\b", "middle",text) #
             text = re.sub("\\blab\\b", "laboratory",text) #
             text = re.sub("\\bformulae\\b", "formula", text) #
@@ -4743,6 +4744,7 @@ class Checker():
             text = re.sub("\\brd\\b", "road", text) #
             text = re.sub("\\benroll", "enrol", text) #
             text = re.sub("\\bjenn", "jen", text) #
+            text = re.sub("\\bmould", "mold",text) #
 
             # states
             text = re.sub("\\bIL\\b","Illinois",text) #
