@@ -158,6 +158,7 @@ class Checker():
             "can",
             "may",
             "now",
+            "bye",
 
             "in",
             "it",
