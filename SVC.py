@@ -95,6 +95,7 @@ class Checker():
             "percent",
             "chapter",
             "thought",
+            "perfect",
 
             "really",
 
