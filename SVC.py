@@ -90,7 +90,7 @@ class Checker():
             "of course",
             "dollars?",
 
-            "alright",
+            "alrighty?",
             "correct",
             "percent",
             "chapter",
@@ -4701,6 +4701,7 @@ class Checker():
 
             # substitutions 
             text = re.sub("\\bcheque", "check", text);
+            text = re.sub("\\bcalibre\\b", "caliber", text);
             text = re.sub("\\borganisation", "organization", text);
             text = re.sub("\\bdefense", "defence", text);
             text = re.sub("\\bflavour", "flavor", text);
