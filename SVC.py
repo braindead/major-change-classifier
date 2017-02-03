@@ -4748,6 +4748,7 @@ class Checker():
             text = re.sub("\\benroll", "enrol", text) #
             text = re.sub("\\bjenn", "jen", text) #
             text = re.sub("\\bmould", "mold",text) #
+            text = re.sub("\\bfavourite\\b", "favorite", text) #
 
             # states
             text = re.sub("\\bIL\\b","Illinois",text) #
