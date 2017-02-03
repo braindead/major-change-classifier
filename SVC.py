@@ -4768,6 +4768,9 @@ class Checker():
 
             # special case for nineties, eighties etc
             text = re.sub("(\w+)ty s\\b",r"\1ties",text)
+
+            # join any other linger s's
+            text = re.sub("(\w+) s\\b",r"\1s", text)
             
             # case for ten s
             text = re.sub("ten s$", r"tens", text)
