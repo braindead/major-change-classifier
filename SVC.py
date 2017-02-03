@@ -188,6 +188,7 @@ class Checker():
             "d",
 
             # surnames
+            "sim+s",
             "smith",
             "johnson",
             "williams",
