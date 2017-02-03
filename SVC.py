@@ -2410,6 +2410,7 @@ class Checker():
             "zane",
 
             # female first name
+            "zoey?",
             "mary",
             "patricia",
             "linda",
@@ -4736,8 +4737,9 @@ class Checker():
             text = re.sub("\\bthird\\b", "three", text);
             text = re.sub("\\btravell", "travel", text);
             text = re.sub("\\bcatalogue?", "catalog", text);
-            text = re.sub("\\bcentre\\b", "center", text);
-            text = re.sub("\\btheatre\\b", "theater", text);
+            text = re.sub("\\bmetre", "meter", text);
+            text = re.sub("\\bcentre", "center", text);
+            text = re.sub("\\btheatre", "theater", text);
             text = re.sub("\\blbs\\b", "pounds", text);
             text = re.sub("\\bauth\\b", "authentication", text);
             text = re.sub("\\bsorta\\b", "sort of",text) #
