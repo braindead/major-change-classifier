@@ -4719,6 +4719,7 @@ class Checker():
             text = re.sub("\\bespecially", "specially", text);
             text = re.sub("\\bpractis", "practic", text);
             text = re.sub("\\boptimis", "optimiz", text);
+            text = re.sub("\\bcapitalis", "capitaliz", text);
             text = re.sub("\\butilis", "utiliz", text);
             text = re.sub("\\bemphasis", "emphasiz", text);
             text = re.sub("\\bcause", "because", text);
