@@ -94,7 +94,6 @@ class Checker():
             "correct",
             "percent",
             "chapter",
-            "through",
             "thought",
 
             "really",
@@ -1147,9 +1146,7 @@ class Checker():
             "dale",
             "mcleod",
             "holcomb",
-            "england",
             "finch",
-            "head",
             "burt",
             "hendrix",
             "sosa",
@@ -4502,6 +4499,7 @@ class Checker():
                 "research,researcher",
                 "religious,",
                 "new money,make money",
+                "off head,off hand",
             ]
 
         def variants(word):
