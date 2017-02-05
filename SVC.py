@@ -4687,6 +4687,7 @@ class Checker():
             text = re.sub("'ve"," have",text)
             text = re.sub("'ll"," will",text)
             text = re.sub("'re"," are",text)
+            text = re.sub("(\w+)n't","\1 not",text)
             text = re.sub("'d"," would",text)
             ### currently, cannot->can is major, vice-versa is minor ###
             # and can->can't and can't->can are minor
