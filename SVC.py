@@ -1623,7 +1623,6 @@ class Checker():
             "florencio",
             "florentino",
             "floyd",
-            "forest",
             "forrest",
             "foster",
             "frances",
@@ -4504,6 +4503,7 @@ class Checker():
                 "religious,",
                 "new money,make money",
                 "off head,off hand",
+                "before service,forest service",
             ]
 
         def variants(word):
