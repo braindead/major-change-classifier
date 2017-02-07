@@ -136,6 +136,7 @@ class Checker():
             "call",
             "were",
 
+            "boy",
             "has",
             "had",
             "the",
