@@ -131,7 +131,6 @@ class Checker():
             "just",
             "what",
             "good",
-            "said",
             "have",
             "nope",
             "then",
@@ -202,7 +201,8 @@ class Checker():
 
         self.names = [
             # surnames
-            "sim+s",
+            "sims",
+            "simms",
             "smith",
             "johnson",
             "williams",
