@@ -192,6 +192,11 @@ class Checker():
             "s",
             "d",
 
+            # speaker tracking
+            "s\d+",
+            ]
+
+        self.names = [
             # surnames
             "sim+s",
             "smith",
@@ -3415,12 +3420,7 @@ class Checker():
             "herminia",
             "terra",
             "celina",
-
-
-
-            # speaker tracking
-            "s\d+",
-            ]
+        ]
 
         metas = [
             "applause",
@@ -4519,8 +4519,18 @@ class Checker():
 
         # metas appear within [brackets], while fillers do not
         self._fillers = "\\b" + "|".join(map(variants, fillers)) + "\\b"
-        self._top_1000 = "\\b" + "|".join(map(variants, top_1000)) + "\\b"
+        if self.extended_fillers:
+            self._top_1000 = "\\b" + "|".join(map(variants, top_1000)) + "\\b"
         self._metas = "\["+"\]|\[".join(metas)+"\]"
+
+    def clean_names(self, string):
+        words = string.split()
+        
+        for word in words:
+            if word in self.names:
+                words.remove(word)
+
+        return " ".join(words)
 
     def _indexer(self,string1,string2):
         """Get the summed index differences between the two strings, where the
@@ -4773,7 +4783,6 @@ class Checker():
             if self.extended_fillers:
                 text = re.sub(self._top_1000,"",text)
 
-
             # remove fillers
             text = re.sub(self._fillers,"",text)
 
@@ -4799,6 +4808,8 @@ class Checker():
 
             # replace any lingering '
             text = re.sub("'", "", text)
+
+            text = self.clean_names(text)
 
             cleaned.append(text.strip())
 
@@ -4873,7 +4884,7 @@ class Checker():
 
         def save(p, r):
             if debug is True:
-                print p + "\t" + ",".join(r) + "\t" + ",".join([s1, s2])
+                print "%s\t%s\t%s" % (p, ",".join(r), ",".join([s1, s2]))
             else:
                 predictions.append(p)
 
