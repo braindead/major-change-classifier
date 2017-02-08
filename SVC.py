@@ -4679,7 +4679,7 @@ class Checker():
             text = re.sub("'bout\\b","about",text) #
             text = re.sub("'preciate\\b","appreciate",text) #
             text = re.sub(r"(\w+)in'",r"\1ing",text) #
-
+            
             # british spellings that are OOV
             ### needs more thought. what about "treatise", "appraise", etc. ###
             #text = re.sub("(\w+i|y)s(ation|ing|e|es|ed|r)\\b","\\1z\\2",text)
@@ -4773,6 +4773,7 @@ class Checker():
             if self.extended_fillers:
                 text = re.sub(self._top_1000,"",text)
 
+
             # remove fillers
             text = re.sub(self._fillers,"",text)
 
@@ -4795,6 +4796,9 @@ class Checker():
 
             # remove OOVs and extra spaces
             #clean = self._oov_clean(text)
+
+            # replace any lingering '
+            text = re.sub("'", "", text)
 
             cleaned.append(text.strip())
 
