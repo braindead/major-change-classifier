@@ -53,7 +53,7 @@ class Checker():
         self.extended_fillers = False
 
         # filler words that will be removed (regex)
-        fillers = [
+        filler_re = [
             "uh+",
             "oh+",
             "hm+",
@@ -65,10 +65,13 @@ class Checker():
             "aha+",
             "ugh+",
             "o+ps",
-            "ah-ha",
-            "uh huhs?",
-            "m+ hm+s?",
+            "ah+-ha",
+            "uh ?huhs?",
+            "m+ ?hm+s?",
+            "s\d+",
+            ]
 
+        self._filler_words = [
             "let me say",
             "let me",
             "all right",
@@ -88,9 +91,11 @@ class Checker():
             "quote unquote",
             "thank you",
             "of course",
-            "dollars?",
+            "dollar",
+            "dollars",
+            "alrighty",
 
-            "alrighty?",
+            "alright",
             "correct",
             "percent",
             "chapter",
@@ -193,7 +198,6 @@ class Checker():
             "d",
 
             # speaker tracking
-            "s\d+",
             ]
 
         self.names = [
@@ -4510,25 +4514,27 @@ class Checker():
             ]
 
         def variants(word):
-            return "|".join([
-                "\\b" + word + "\\b", 
-                "\\b" + word + "s\\b", 
-                "\\b" + word + "d?\\b", 
-                "\\b" + word + "ed\\b"
-                ])
+            return [word, word + "s", word + "d", word + "ed"]
 
         # metas appear within [brackets], while fillers do not
-        self._fillers = "\\b" + "|".join(map(variants, fillers)) + "\\b"
+        self._fillers = "\\b" + "|".join(filler_re) + "\\b"
+
         if self.extended_fillers:
             self._top_1000 = "\\b" + "|".join(map(variants, top_1000)) + "\\b"
+
         self._metas = "\["+"\]|\[".join(metas)+"\]"
 
     def clean_names(self, string):
         words = string.split()
         
-        for word in words:
-            if word in self.names:
-                words.remove(word)
+        words = [word for word in words if word not in self.names]
+
+        return " ".join(words)
+
+    def clean_filler_words(self, string):
+        words = string.split()
+
+        words = [word for word in words if word not in self._filler_words]
 
         return " ".join(words)
 
@@ -4785,6 +4791,7 @@ class Checker():
 
             # remove fillers
             text = re.sub(self._fillers,"",text)
+            text = self.clean_filler_words(text)
 
             # replace digits
             text = self._num_replace(text)
