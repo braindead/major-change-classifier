@@ -124,6 +124,7 @@ class Checker():
             "could",
             "their",
             "about",
+            "going",
 
             "fact",
             "your",
