@@ -109,6 +109,7 @@ class Checker():
             "dollar",
             "really",
 
+            "based",
             "again",
             "brian",
             "bryan",
