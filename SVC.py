@@ -4512,6 +4512,7 @@ class Checker():
                 "new money,make money",
                 "off head,off hand",
                 "before service,forest service",
+                "immigrated,emigrated",
             ]
 
         self._utterances = "\\b" + "\\b|\\b".join(utterances) + "\\b"
@@ -4866,22 +4867,22 @@ class Checker():
         print(predictions)
 
     def is_known_minor(self, row):
-        try:
-            return self.known_minors.index(",".join(row)) >= 0
-        except ValueError:
-            try:
-                return self.known_minors.index(",".join(list(reversed(row)))) >= 0
-            except ValueError:
-                return False
+        if ",".join(row) in self.known_minors:
+            return True
+
+        if ",".join(list(reversed(row))) in self.known_minors:
+            return True
+
+        return False
 
     def is_known_major(self, row):
-        try:
-            return self.known_majors.index(",".join(row)) >= 0
-        except ValueError:
-            try:
-                return self.known_majors.index(",".join(list(reversed(row)))) >= 0
-            except ValueError:
-                return False
+        if ",".join(row) in self.known_majors:
+            return True
+
+        if ",".join(list(reversed(row))) in self.known_majors:
+            return True
+
+        return False
 
     def predict_json(self, json_file, extended_fillers, debug):
         predictions = []
