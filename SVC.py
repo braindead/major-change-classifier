@@ -71,12 +71,10 @@ class Checker():
             "s\d+",
             ]
 
-        self._filler_words = [
+        filler_phrases = [
             "let me say",
             "let me",
             "all right",
-            "actually",
-            "basically",
             "i guess",
             "i mean",
             "i think",
@@ -85,16 +83,22 @@ class Checker():
             "you know",
             "i don't know",
             "excuse me",
-            "o'clock",
             "so to speak",
             "that's good",
             "quote unquote",
             "thank you",
             "of course",
-            "dollar",
-            "dollars",
-            "alrighty",
+            ]
 
+        self._filler_words = [
+
+            "basically",
+            
+            "alrighty",
+            "actually",
+
+            "o'clock",
+            "dollars",
             "alright",
             "correct",
             "percent",
@@ -102,6 +106,7 @@ class Checker():
             "thought",
             "perfect",
 
+            "dollar",
             "really",
 
             "again",
@@ -196,8 +201,6 @@ class Checker():
             "i",
             "s",
             "d",
-
-            # speaker tracking
             ]
 
         self.names = [
@@ -4516,6 +4519,7 @@ class Checker():
             ]
 
         self._utterances = "\\b" + "\\b|\\b".join(utterances) + "\\b"
+        self._filler_phrases = "\\b" + "\\b|\\b".join(filler_phrases) + "\\b"
 
         if self.extended_fillers:
             self._top_1000 = "\\b" + "|".join(map(variants, top_1000)) + "\\b"
@@ -4789,6 +4793,7 @@ class Checker():
                 text = re.sub(self._top_1000,"",text)
 
             text = re.sub(self._utterances,"",text)
+            text = re.sub(self._filler_phrases,"",text)
 
             text = self.clean_filler_words(text)
 
