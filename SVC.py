@@ -53,7 +53,7 @@ class Checker():
         self.extended_fillers = False
 
         # filler words that will be removed (regex)
-        filler_re = [
+        utterances = [
             "uh+",
             "oh+",
             "hm+",
@@ -104,6 +104,7 @@ class Checker():
 
             "really",
 
+            "again",
             "brian",
             "bryan",
             "would",
@@ -4513,11 +4514,7 @@ class Checker():
                 "before service,forest service",
             ]
 
-        def variants(word):
-            return [word, word + "s", word + "d", word + "ed"]
-
-        # metas appear within [brackets], while fillers do not
-        self._fillers = "\\b" + "|".join(filler_re) + "\\b"
+        self._utterances = "\\b" + "\\b|\\b".join(utterances) + "\\b"
 
         if self.extended_fillers:
             self._top_1000 = "\\b" + "|".join(map(variants, top_1000)) + "\\b"
@@ -4789,8 +4786,8 @@ class Checker():
             if self.extended_fillers:
                 text = re.sub(self._top_1000,"",text)
 
-            # remove fillers
-            text = re.sub(self._fillers,"",text)
+            text = re.sub(self._utterances,"",text)
+
             text = self.clean_filler_words(text)
 
             # replace digits
