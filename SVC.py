@@ -4666,6 +4666,7 @@ class Checker():
             text = re.sub("\\bmr\\b","mister",text)
             text = re.sub("\\bms\\b","miss",text)
             text = re.sub("\\bjr\\b","junior",text)
+            text = re.sub("\\bsr\\b","senior",text)
             text = re.sub("\\bdunno\\b","don't know",text)
             text = re.sub("(\d+|\w+)\.(\d+)",r"\1 point \2",text)
             text = re.sub("1\/",r"",text)
