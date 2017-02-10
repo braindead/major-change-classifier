@@ -4519,6 +4519,7 @@ class Checker():
                 "before service,forest service",
                 "immigrated,emigrated",
                 "invincible,invisible",
+                "preform,perform",
             ]
 
         self._utterances = "\\b" + "\\b|\\b".join(utterances) + "\\b"
