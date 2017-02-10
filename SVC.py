@@ -4520,6 +4520,7 @@ class Checker():
                 "immigrated,emigrated",
                 "invincible,invisible",
                 "preform,perform",
+                "capitan,captain",
             ]
 
         self._utterances = "\\b" + "\\b|\\b".join(utterances) + "\\b"
