@@ -4785,6 +4785,7 @@ class Checker():
             text = re.sub("\\bjenn", "jen", text) #
             text = re.sub("\\bmould", "mold",text) #
             text = re.sub("\\blearnt\\b", "learned",text) #
+            text = re.sub("\\bleukaemia\\b", "leukemia",text) #
 
             # states
             text = re.sub("\\bIL\\b","Illinois",text) #
