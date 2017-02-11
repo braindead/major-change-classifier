@@ -200,6 +200,7 @@ class Checker():
             "eh",
             "da",
             "im",
+            "we",
 
             "a",
             "i",
