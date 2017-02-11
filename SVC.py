@@ -177,6 +177,7 @@ class Checker():
             "bye",
             "are",
             "his",
+            "our",
 
             "in",
             "it",
