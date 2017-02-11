@@ -4521,6 +4521,7 @@ class Checker():
                 "invincible,invisible",
                 "preform,perform",
                 "capitan,captain",
+                "mixing,unmixing",
             ]
 
         self._utterances = "\\b" + "\\b|\\b".join(utterances) + "\\b"
