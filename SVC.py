@@ -4779,6 +4779,7 @@ class Checker():
             text = re.sub("\\bcentre", "center", text);
             text = re.sub("\\btheatre", "theater", text);
             text = re.sub("\\bgauge", "gage", text);
+            text = re.sub("\\bprogramm", "program", text);
             text = re.sub("\\blbs\\b", "pounds", text);
             text = re.sub("\\bauth\\b", "authentication", text);
             text = re.sub("\\bsorta\\b", "sort of",text) #
