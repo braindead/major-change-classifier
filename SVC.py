@@ -4523,6 +4523,7 @@ class Checker():
                 "preform,perform",
                 "capitan,captain",
                 "mixing,unmixing",
+                "or,are",
             ]
 
         self._utterances = "\\b" + "\\b|\\b".join(utterances) + "\\b"
@@ -4918,7 +4919,10 @@ class Checker():
             s1,s2 = row[0],row[1]
 
             if s1 == "" and s2 == "":
-                save("1", row_)
+                if self.is_known_major(row_):
+                    save("2", row_)
+                else:
+                    save("1", row_)
                 continue
 
             if self.is_known_minor(row):
