@@ -69,6 +69,7 @@ class Checker():
             "uh ?huhs?",
             "m+ ?hm+s?",
             "s\d+",
+            "yad+a",
             ]
 
         filler_phrases = [
@@ -128,7 +129,6 @@ class Checker():
             "going",
             "those",
             "verse",
-            "yadda",
 
             "fact",
             "your",
