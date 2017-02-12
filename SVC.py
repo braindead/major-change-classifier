@@ -4810,6 +4810,7 @@ class Checker():
             text = re.sub("\\bcause", "because", text);
             text = re.sub("\\btravelled\\b", "traveled", text);
             text = re.sub("\\bcancelled\\b", "canceled", text);
+            text = re.sub("\\blabelled\\b", "labeled", text);
             text = re.sub("\\bcounsell", "counsel", text);
             text = re.sub("\\brecognis(e|i)", r"recogniz\1", text);
             text = re.sub("\\brealis(e|i)", r"realiz\1", text);
