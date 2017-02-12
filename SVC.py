@@ -4746,7 +4746,8 @@ class Checker():
             text = re.sub("\\bcheque", "check", text);
             text = re.sub("\\bcalibre\\b", "caliber", text);
             text = re.sub("\\borganisation", "organization", text);
-            text = re.sub("\\bdefense", "defence", text);
+            text = re.sub("\\bdefence", "defense", text);
+            text = re.sub("\\boffence", "offense", text);
             text = re.sub("\\bflavour", "flavor", text);
             text = re.sub("\\bbehaviour", "behavior", text);
             text = re.sub("\\benamour", "enamor", text);
