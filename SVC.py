@@ -2295,7 +2295,6 @@ class Checker():
             "sol",
             "solomon",
             "son",
-            "sonny",
             "spencer",
             "stacey",
             "stacy",
@@ -3465,6 +3464,7 @@ class Checker():
 
         # known minors
         self.known_minors = [
+                "sonny,sunny",
                 "analyses,analysis",
                 "thong,",
                 "bane,bain",
