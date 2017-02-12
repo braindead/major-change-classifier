@@ -770,7 +770,6 @@ class Checker():
             "mcclain",
             "fischer",
             "wall",
-            "small",
             "melton",
             "hensley",
             "bond",
