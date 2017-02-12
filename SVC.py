@@ -274,6 +274,7 @@ class Checker():
             "morris",
             "rogers",
             "reed",
+            "reeds",
             "cook",
             "morgan",
             "bell",
@@ -3458,6 +3459,7 @@ class Checker():
 
         # known minors
         self.known_minors = [
+                "times,by",
                 "can,could",
                 "have,had",
                 "approach,approached",
