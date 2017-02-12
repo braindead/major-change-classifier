@@ -3460,6 +3460,7 @@ class Checker():
 
         # known minors
         self.known_minors = [
+                "calcutta,kolkata",
                 "times,by",
                 "can,could",
                 "have,had",
