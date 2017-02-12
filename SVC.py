@@ -4756,6 +4756,7 @@ class Checker():
             text = re.sub("\\bwon't\\b","will not",text)
             text = re.sub("\\bain't?","are not",text)
             text = re.sub("\\bdidn't?","did not",text)
+            text = re.sub("\\bdon't?","do not",text)
 
             # remove rest
             text = re.sub("'s\\b","",text)
