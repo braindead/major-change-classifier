@@ -219,6 +219,8 @@ class Checker():
 
         self.names = [
             # surnames
+            "doughty",
+            "dowdy",
             "bitty",
             "biddy",
             "sims",
