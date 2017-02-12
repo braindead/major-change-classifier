@@ -126,12 +126,12 @@ class Checker():
             "about",
             "going",
             "those",
+            "verse",
 
             "fact",
             "your",
             "like",
             "zero",
-            "verse",
             "yeah",
             "well",
             "this",
@@ -149,6 +149,7 @@ class Checker():
             "call",
             "were",
             "gets",
+            "said",
 
             "for",
             "boy",
