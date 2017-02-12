@@ -440,7 +440,6 @@ class Checker():
             "richards",
             "williamson",
             "johnston",
-            "banks",
             "meyer",
             "bishop",
             "mccoy",
