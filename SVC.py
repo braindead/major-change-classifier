@@ -4685,7 +4685,9 @@ class Checker():
             text = re.sub("\\bdunno\\b","don't know",text)
             text = re.sub("\\bvs\\b","versus",text)
             text = re.sub("\\bfella\\b","fellow",text)
+            text = re.sub("\\bx\\b","by",text)
             text = re.sub("(\d+|\w+)\.(\d+)",r"\1 point \2",text)
+            text = re.sub("(\d+)x(\d+)",r"\1 by \2",text)
             text = re.sub("1\/",r"",text)
 
             # convert £ to pounds
