@@ -1816,6 +1816,7 @@ class Checker():
             "jed",
             "jeff",
             "geoff",
+            "leone",
             "jefferey",
             "geofferey",
             "jefferson",
