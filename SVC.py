@@ -203,6 +203,7 @@ class Checker():
             "da",
             "im",
             "we",
+            "me",
 
             "a",
             "i",
