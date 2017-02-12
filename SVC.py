@@ -4740,7 +4740,7 @@ class Checker():
 
             # contracted forms
             # lowercase "i'm" is OOV; currently removing "am" in fillers
-            text = re.sub("'m+(a)?"," am",text) #
+            text = re.sub("'m+(a)?\\b"," am",text) #
             text = re.sub("'ve"," have",text)
             text = re.sub("'ll"," will",text)
             text = re.sub("'re"," are",text)
