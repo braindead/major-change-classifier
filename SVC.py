@@ -4695,7 +4695,7 @@ class Checker():
             #text = re.sub(",000,","",text)
 
             # remove dashes and colons
-            text = re.sub("-|:"," ",text)
+            text = re.sub("-|:|\/"," ",text)
 
             # remove metas
             text = re.sub(self._metas,"",text)
