@@ -212,6 +212,7 @@ class Checker():
             "i",
             "s",
             "d",
+            "n",
             ]
 
         self.names = [
