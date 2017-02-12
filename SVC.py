@@ -729,7 +729,6 @@ class Checker():
             "chase",
             "davenport",
             "hood",
-            "gates",
             "clay",
             "ayala",
             "sawyer",
