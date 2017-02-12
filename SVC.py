@@ -4773,6 +4773,7 @@ class Checker():
             #text = re.sub("(\d+)(th)","\g<1>",text)
 
             # substitutions 
+            text = re.sub("vitaliz", "vitalis", text);
             text = re.sub("\\bminimiz", "minimis", text);
             text = re.sub("\\bpaedi", "pedi", text);
             text = re.sub("\\bpyjama", "pajama", text);
