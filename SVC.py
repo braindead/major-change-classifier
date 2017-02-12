@@ -150,6 +150,7 @@ class Checker():
             "were",
             "gets",
             "said",
+            "mile",
 
             "for",
             "boy",
