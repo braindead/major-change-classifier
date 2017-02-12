@@ -3466,6 +3466,7 @@ class Checker():
 
         # known minors
         self.known_minors = [
+                "fractions,fraction",
                 "pop,popped",
                 "relations,relation",
                 "sonny,sunny",
@@ -4768,7 +4769,7 @@ class Checker():
             text = re.sub("\\bfibres?\\b", "fiber", text);
             text = re.sub("litres?\\b", "liter", text);
             text = re.sub("metres?\\b", "meter", text);
-            text = re.sub("\\borganisation", "organization", text);
+            text = re.sub("\\borganiz", "organis", text);
             text = re.sub("\\bdefence", "defense", text);
             text = re.sub("\\boffence", "offense", text);
             text = re.sub("\\bflavour", "flavor", text);
