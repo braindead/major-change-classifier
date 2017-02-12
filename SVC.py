@@ -3466,6 +3466,7 @@ class Checker():
 
         # known minors
         self.known_minors = [
+                "pop,popped",
                 "relations,relation",
                 "sonny,sunny",
                 "analyses,analysis",
