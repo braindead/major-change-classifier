@@ -2428,11 +2428,13 @@ class Checker():
             "zachary",
             "zachery",
             "zack",
+            "zach",
             "zackary",
             "zane",
 
             # female first name
-            "zoey?",
+            "zoe",
+            "zoey",
             "mary",
             "patricia",
             "linda",
