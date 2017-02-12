@@ -1026,7 +1026,6 @@ class Checker():
             "yang",
             "mcneil",
             "suarez",
-            "case",
             "petty",
             "gould",
             "mcfarland",
