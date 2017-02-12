@@ -2470,6 +2470,7 @@ class Checker():
             "sharon",
             "michelle",
             "laura",
+            "sara",
             "sarah",
             "kimberly",
             "deborah",
