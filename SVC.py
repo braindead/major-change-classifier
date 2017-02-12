@@ -4749,6 +4749,7 @@ class Checker():
             text = re.sub("\\bdefence", "defense", text);
             text = re.sub("\\boffence", "offense", text);
             text = re.sub("\\bflavour", "flavor", text);
+            text = re.sub("\\bharbour", "harbor", text);
             text = re.sub("\\bbehaviour", "behavior", text);
             text = re.sub("\\benamour", "enamor", text);
             text = re.sub("\\blabour", "labor", text);
