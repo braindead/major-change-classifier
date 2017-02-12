@@ -4769,6 +4769,7 @@ class Checker():
             #text = re.sub("(\d+)(th)","\g<1>",text)
 
             # substitutions 
+            text = re.sub("\\bspelt\\b", "spelled", text);
             text = re.sub("\\bdreamt\\b", "dreamed", text);
             text = re.sub("\\bave\\b", "avenue", text);
             text = re.sub("vitaliz", "vitalis", text);
