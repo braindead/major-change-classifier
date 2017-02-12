@@ -4753,7 +4753,8 @@ class Checker():
             # and can->can't and can't->can are minor
             text = re.sub("\\bcan't\\b","cannot",text) #
             text = re.sub("\\bwon't\\b","will not",text)
-            text = re.sub("\\bain't\\b","are not",text)
+            text = re.sub("\\bain't?","are not",text)
+            text = re.sub("\\bdidn't?","did not",text)
 
             # remove rest
             text = re.sub("'s\\b","",text)
