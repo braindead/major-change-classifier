@@ -70,6 +70,7 @@ class Checker():
             "m+ ?hm+s?",
             "s\d+",
             "yad+a",
+            "ha+",
             ]
 
         filler_phrases = [
