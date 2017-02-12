@@ -4754,6 +4754,7 @@ class Checker():
             text = re.sub("\\bcalibre\\b", "caliber", text);
             text = re.sub("\\bfibres?\\b", "fiber", text);
             text = re.sub("litres?\\b", "liter", text);
+            text = re.sub("metres?\\b", "meter", text);
             text = re.sub("\\borganisation", "organization", text);
             text = re.sub("\\bdefence", "defense", text);
             text = re.sub("\\boffence", "offense", text);
