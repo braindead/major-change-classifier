@@ -127,7 +127,6 @@ class Checker():
             "going",
             "those",
             "verse",
-            "liter",
 
             "fact",
             "your",
@@ -4753,7 +4752,8 @@ class Checker():
             # substitutions 
             text = re.sub("\\bcheque", "check", text);
             text = re.sub("\\bcalibre\\b", "caliber", text);
-            text = re.sub("\\bfibre\\b", "fiber", text);
+            text = re.sub("\\bfibres?\\b", "fiber", text);
+            text = re.sub("litres?\\b", "liter", text);
             text = re.sub("\\borganisation", "organization", text);
             text = re.sub("\\bdefence", "defense", text);
             text = re.sub("\\boffence", "offense", text);
