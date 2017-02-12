@@ -313,6 +313,7 @@ class Checker():
             "powell",
             "long",
             "patterson",
+            "paterson",
             "hughes",
             "flores",
             "washington",
