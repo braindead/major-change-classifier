@@ -4792,6 +4792,7 @@ class Checker():
             text = re.sub("\\blbs\\b", "pounds", text);
             text = re.sub("\\bauth\\b", "authentication", text);
             text = re.sub("\\bsorta\\b", "sort of",text) #
+            text = re.sub("\\bwanna\\b", "want to",text) #
             text = re.sub("\\bshoulda\\b", "should have",text) #
             text = re.sub("\\bmid\\b", "middle",text) #
             text = re.sub("\\blab\\b", "laboratory",text) #
