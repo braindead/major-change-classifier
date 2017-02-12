@@ -4751,6 +4751,7 @@ class Checker():
             #text = re.sub("(\d+)(th)","\g<1>",text)
 
             # substitutions 
+            text = re.sub("\\bmum", "mom", text);
             text = re.sub("\\bcheque", "check", text);
             text = re.sub("\\bcalibre\\b", "caliber", text);
             text = re.sub("\\bfibres?\\b", "fiber", text);
