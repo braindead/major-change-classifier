@@ -128,6 +128,7 @@ class Checker():
             "going",
             "those",
             "verse",
+            "yadda",
 
             "fact",
             "your",
