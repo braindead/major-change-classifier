@@ -105,6 +105,7 @@ class Checker():
             "chapter",
             "thought",
             "perfect",
+            "mountie",
 
             "dollar",
             "really",
