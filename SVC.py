@@ -3467,6 +3467,7 @@ class Checker():
 
         # known minors
         self.known_minors = [
+                "self,selves",
                 "hundredth,one hundred th",
                 "one,",
                 "fractions,fraction",
