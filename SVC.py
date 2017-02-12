@@ -205,6 +205,7 @@ class Checker():
             "im",
             "we",
             "me",
+            "my",
 
             "a",
             "i",
