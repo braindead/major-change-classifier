@@ -414,7 +414,6 @@ class Checker():
             "kelley",
             "franklin",
             "lawson",
-            "fields",
             "gutierrez",
             "ryan",
             "schmidt",
