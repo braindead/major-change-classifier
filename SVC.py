@@ -4743,16 +4743,19 @@ class Checker():
             # contracted forms
             # lowercase "i'm" is OOV; currently removing "am" in fillers
             text = re.sub("'m+(a)?\\b"," am",text) #
-            text = re.sub("'ve"," have",text)
-            text = re.sub("'ll"," will",text)
-            text = re.sub("'re"," are",text)
-            text = re.sub("(\w+)n't","\1 not",text)
-            text = re.sub("'d"," would",text)
+            text = re.sub("'ve\\b"," have",text)
+            text = re.sub("'ol\\b","old",text)
+            text = re.sub("'ll\\b"," will",text)
+            text = re.sub("'re\\b"," are",text)
+            text = re.sub("(\w+)n't\\b","\1 not",text)
+            text = re.sub("'d\\b"," would",text)
             ### currently, cannot->can is major, vice-versa is minor ###
             # and can->can't and can't->can are minor
-            text = re.sub("can't","cannot",text) #
-            text = re.sub("won't","will not",text)
-            text = re.sub("ain't","are not",text)
+            text = re.sub("\\bcan't\\b","cannot",text) #
+            text = re.sub("\\bwon't\\b","will not",text)
+            text = re.sub("\\bain't\\b","are not",text)
+
+            # remove rest
             text = re.sub("'s\\b","",text)
             text = re.sub("'d\\b","",text)
 
