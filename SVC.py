@@ -110,6 +110,7 @@ class Checker():
             "perfect",
             "mountie",
 
+            "please",
             "dollar",
             "really",
 
