@@ -113,6 +113,7 @@ class Checker():
             "please",
             "dollar",
             "really",
+            "thanks",
 
             "based",
             "again",
