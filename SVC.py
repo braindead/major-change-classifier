@@ -89,6 +89,7 @@ class Checker():
             "that's good",
             "quote unquote",
             "thank you",
+            "not know",
             "of course",
             ]
 
@@ -252,7 +253,6 @@ class Checker():
             "allegro",
             "reedy",
             "somma",
-            "vloggers",
             "tuscon",
             "senaptec",
             "perdue",
