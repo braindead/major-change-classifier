@@ -4913,6 +4913,7 @@ class Checker():
             #text = re.sub("(\d+)(th)","\g<1>",text)
 
             # substitutions 
+            text = re.sub("\\bapologiz", "apologis", text);
             text = re.sub("\\bsceptic", "skeptic", text);
             text = re.sub("\\bst\\b", "street", text);
             text = re.sub("\\bstorey\\b", "story", text);
