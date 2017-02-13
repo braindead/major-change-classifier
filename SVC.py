@@ -150,7 +150,6 @@ class Checker():
             "blah",
             "with",
             "from",
-            "call",
             "were",
             "gets",
             "said",
