@@ -4906,6 +4906,9 @@ class Checker():
             text = re.sub("'s\\b","",text)
             text = re.sub("'d\\b","",text)
 
+            # clean any lingering '
+            text = re.sub("'", "", text)
+            
             # ordinals
             text = re.sub("(\d*)(1st)","\g<1>0 first",text)
             text = re.sub("(\d*)(2nd)","\g<1>0 second",text)
@@ -5031,9 +5034,6 @@ class Checker():
 
             # remove OOVs and extra spaces
             #clean = self._oov_clean(text)
-
-            # replace any lingering '
-            text = re.sub("'", "", text)
 
             text = self.clean_names(text)
 
