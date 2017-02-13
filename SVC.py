@@ -4648,6 +4648,7 @@ class Checker():
 
         # known majors
         self.known_majors = [
+                "nothing,everything",
                 "advise,advice",
                 "seemless,seamless",
                 "affects,infects",
