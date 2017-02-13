@@ -4891,7 +4891,6 @@ class Checker():
             text = re.sub("'ol\\b","old",text)
             text = re.sub("'ll\\b"," will",text)
             text = re.sub("'re\\b"," are",text)
-            text = re.sub("(\w+)n't\\b","\1 not",text)
             text = re.sub("'d\\b"," would",text)
             ### currently, cannot->can is major, vice-versa is minor ###
             # and can->can't and can't->can are minor
@@ -4900,6 +4899,7 @@ class Checker():
             text = re.sub("\\bain't?","are not",text)
             text = re.sub("\\bdidn't?","did not",text)
             text = re.sub("\\bdon't?","do not",text)
+            text = re.sub("(\w+)n't\\b","\1 not",text)
 
             # remove rest
             text = re.sub("'s\\b","",text)
