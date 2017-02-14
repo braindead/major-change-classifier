@@ -1439,7 +1439,6 @@ class Checker():
             "arnulfo",
             "aron",
             "arron",
-            "art",
             "arthur",
             "arturo",
             "asa",
