@@ -100,6 +100,7 @@ class Checker():
             "alrighty",
             "actually",
 
+            "because",
             "o'clock",
             "dollars",
             "alright",
