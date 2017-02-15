@@ -3612,6 +3612,7 @@ class Checker():
 
         # known minors
         self.known_minors = [
+                "sats,sat",
                 "sometimes,sometime",
                 "lasts,last",
                 "self,selves",
