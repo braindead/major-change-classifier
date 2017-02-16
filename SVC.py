@@ -158,6 +158,7 @@ class Checker():
             "said",
             "mile",
 
+            "she",
             "for",
             "boy",
             "has",
@@ -188,6 +189,7 @@ class Checker():
             "his",
             "our",
 
+            "he",
             "in",
             "it",
             "of",
