@@ -101,7 +101,6 @@ class Checker():
             "actually",
 
             "because",
-            "o'clock",
             "dollars",
             "alright",
             "correct",
@@ -111,6 +110,7 @@ class Checker():
             "perfect",
             "mountie",
 
+            "oclock",
             "please",
             "dollar",
             "really",
