@@ -5018,7 +5018,7 @@ class Checker():
             text = re.sub("\\biii\\b", "three", text);
             text = re.sub("\\bvii\\b", "seven", text);
             text = re.sub("\\bviii\\b", "eight", text);
-            text = re.sub("\\bIX\\b", "nine", text);
+            text = re.sub("\\bix\\b", "nine", text);
 
             if self.extended_fillers:
                 text = re.sub(self._top_1000,"",text)
