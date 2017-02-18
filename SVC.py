@@ -4910,7 +4910,7 @@ class Checker():
             text = re.sub("(\w+)n't\\b","\1 not",text)
             text = re.sub("\\bol'","old",text)
             text = re.sub("\\bole\\b","old",text)
-            text = re.sub("\\lymphs\\b","lymph",text)
+            text = re.sub("\\bgimme\\b","give me",text)
 
             # remove rest
             text = re.sub("'s\\b","",text)
@@ -4926,6 +4926,7 @@ class Checker():
             #text = re.sub("(\d+)(th)","\g<1>",text)
 
             # substitutions 
+            text = re.sub("\\blymphs\\b","lymph",text)
             text = re.sub("\\bmoisturiz", "moisturis", text);
             text = re.sub("\\banaes", "anes", text);
             text = re.sub("\\balumin", "alumini", text);
