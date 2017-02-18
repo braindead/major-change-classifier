@@ -4925,6 +4925,7 @@ class Checker():
             #text = re.sub("(\d+)(th)","\g<1>",text)
 
             # substitutions 
+            text = re.sub("\\bmoisturiz", "moisturis", text);
             text = re.sub("\\banaes", "anes", text);
             text = re.sub("\\balumin", "alumini", text);
             text = re.sub("\\bapologiz", "apologis", text);
