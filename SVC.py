@@ -3611,6 +3611,7 @@ class Checker():
 
         # known minors
         self.known_minors = [
+                "four,iv",
                 "five,v",
                 "usd,us",
                 "shall,should",
