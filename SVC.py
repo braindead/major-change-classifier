@@ -4928,8 +4928,9 @@ class Checker():
             #text = re.sub("(\d+)(th)","\g<1>",text)
 
             # substitutions 
-            text = re.sub("\\blicence\\b","license\\b",text)
-            text = re.sub("\\banalyse\\b","analyze\\b",text)
+            text = re.sub("\\bemphasiz","emphasis",text)
+            text = re.sub("\\blicence\\b","license",text)
+            text = re.sub("\\banalyse\\b","analyze",text)
             text = re.sub("\\blymphs\\b","lymph",text)
             text = re.sub("\\bmoisturiz", "moisturis", text);
             text = re.sub("\\banaes", "anes", text);
