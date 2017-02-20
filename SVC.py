@@ -4930,6 +4930,7 @@ class Checker():
             #text = re.sub("(\d+)(th)","\g<1>",text)
 
             # substitutions 
+            text = re.sub("\\bjewell","jewel",text)
             text = re.sub("\\bemphasiz","emphasis",text)
             text = re.sub("\\blicence\\b","license",text)
             text = re.sub("\\banalyse\\b","analyze",text)
