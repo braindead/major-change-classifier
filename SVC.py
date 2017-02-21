@@ -4915,6 +4915,7 @@ class Checker():
             text = re.sub("\\bain't?","are not",text)
             text = re.sub("\\bdidn't?","did not",text)
             text = re.sub("\\bdon't?","do not",text)
+            text = re.sub("'round\\b","around",text)
             text = re.sub("(\w+)n't\\b","\1 not",text)
             text = re.sub("\\bol'","old",text)
             text = re.sub("\\bole\\b","old",text)
