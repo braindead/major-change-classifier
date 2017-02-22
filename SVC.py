@@ -127,6 +127,7 @@ class Checker():
             "sorta",
             "kinda",
             "gonna",
+            "gotta",
             "liked",
             "could",
             "their",
