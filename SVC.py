@@ -158,7 +158,9 @@ class Checker():
             "gets",
             "said",
             "mile",
+            "just",
 
+            "got",
             "she",
             "for",
             "boy",
