@@ -115,7 +115,9 @@ class Checker():
             "dollar",
             "really",
             "thanks",
+            "woohoo",
 
+            "wohoo",
             "based",
             "again",
             "brian",
@@ -160,6 +162,7 @@ class Checker():
             "mile",
             "just",
 
+            "woo",
             "got",
             "she",
             "for",
