@@ -4993,6 +4993,7 @@ class Checker():
             text = re.sub("\\bfavour", "favor", text) #
             text = re.sub("\\bneighbour", "neighbor", text);
             text = re.sub("\\bparlour", "parlor", text);
+            text = re.sub("\\bdishonour", "dishonor", text);
             text = re.sub("\\bhonour", "honor", text);
             text = re.sub("\\bespecially", "specially", text);
             text = re.sub("\\bpractis", "practic", text);
