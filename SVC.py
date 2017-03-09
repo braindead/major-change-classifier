@@ -4946,6 +4946,8 @@ class Checker():
 
             # substitutions 
             text = re.sub("\\bgotcha\\b","got you",text)
+            text = re.sub("\\bcoulda\\b","could have",text)
+            text = re.sub("\\bwoulda\\b","would have",text)
             text = re.sub("\\btyre","tire",text)
             text = re.sub("\\btumour\\b","tumor",text)
             text = re.sub("\\bjewell","jewel",text)
