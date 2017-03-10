@@ -4677,6 +4677,7 @@ class Checker():
                 "seemless,seamless",
                 "affects,infects",
                 "affect,effect",
+                "affects,effects",
                 "spilling,spieling",
                 "were unavailable,weren't available",
                 "totally,absolutely",
