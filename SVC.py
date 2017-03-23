@@ -4947,6 +4947,7 @@ class Checker():
             #text = re.sub("(\d+)(th)","\g<1>",text)
 
             # substitutions 
+            text = re.sub("\\bnaïve\\b","naive",text)
             text = re.sub("\\bgotcha\\b","got you",text)
             text = re.sub("\\bcoulda\\b","could have",text)
             text = re.sub("\\bwoulda\\b","would have",text)
