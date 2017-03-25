@@ -4935,6 +4935,7 @@ class Checker():
             text = re.sub("\\bole\\b","old",text)
             text = re.sub("\\bgimme\\b","give me",text)
             text = re.sub("\\b100's\\b","hundreds",text)
+            text = re.sub("\\berr+\\b","err",text)
 
             # remove rest
             text = re.sub("'s\\b","",text)
