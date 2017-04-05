@@ -83,6 +83,7 @@ class Checker():
             "kind of",
             "sort of",
             "you know",
+            "lets see",
             "i don't know",
             "excuse me",
             "so to speak",
