@@ -83,7 +83,7 @@ class Checker():
             "kind of",
             "sort of",
             "you know",
-            "lets see",
+            "let us see",
             "i don't know",
             "excuse me",
             "so to speak",
@@ -4937,7 +4937,7 @@ class Checker():
             text = re.sub("\\bole\\b","old",text)
             text = re.sub("\\bgimme\\b","give me",text)
             text = re.sub("\\b100's\\b","hundreds",text)
-            text = re.sub("\\berr+\\b","err",text)
+            text = re.sub("\\b(\w+)'s\\b",r"\1 us",text)
 
             # remove rest
             text = re.sub("'s\\b","",text)
@@ -4953,6 +4953,7 @@ class Checker():
             #text = re.sub("(\d+)(th)","\g<1>",text)
 
             # substitutions 
+            text = re.sub("\\berr+\\b","err",text)
             text = re.sub("\\bgotcha\\b","got you",text)
             text = re.sub("\\bcoulda\\b","could have",text)
             text = re.sub("\\bwoulda\\b","would have",text)
