@@ -4866,6 +4866,7 @@ class Checker():
 
             # expanders
             text = re.sub("&",r" and ",text)
+            text = re.sub("([a-z])\+",r"\1 plus",text)
             text = re.sub("\$([\d,]+)",r"\1 dollars",text)
             text = re.sub("\\bst\\b","saint",text)
             text = re.sub("\\bst\\b","saint",text)
