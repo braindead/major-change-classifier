@@ -4952,6 +4952,11 @@ class Checker():
             text = re.sub("(\d*)(3rd)","\g<1>0 third",text)
             #text = re.sub("(\d+)(th)","\g<1>",text)
 
+            # units
+            text = re.sub("\\bmm","millimeter",text)
+            text = re.sub("\\bcm","centimeter",text)
+            text = re.sub("\\bkm","kilometer",text)
+
             # substitutions 
             text = re.sub("\\berr+\\b","err",text)
             text = re.sub("\\bgotcha\\b","got you",text)
