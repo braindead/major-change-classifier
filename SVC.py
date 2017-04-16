@@ -4953,11 +4953,6 @@ class Checker():
             text = re.sub("(\d*)(3rd)","\g<1>0 third",text)
             #text = re.sub("(\d+)(th)","\g<1>",text)
 
-            # units
-            text = re.sub("\\bmm","millimeter",text)
-            text = re.sub("\\bcm","centimeter",text)
-            text = re.sub("\\bkm","kilometer",text)
-
             # substitutions 
             text = re.sub("\\berr+\\b","err",text)
             text = re.sub("\\bgotcha\\b","got you",text)
@@ -5090,6 +5085,11 @@ class Checker():
 
             # case for hunderds and thousands
             text = re.sub("one (hundred|thousand) s$", r"\1s", text)
+
+            # units
+            text = re.sub("\\bmm\\b","millimeter",text)
+            text = re.sub("\\bcm\\b","centimeter",text)
+            text = re.sub("\\bkm\\b","kilometer",text)
 
             # remove OOVs and extra spaces
             #clean = self._oov_clean(text)
