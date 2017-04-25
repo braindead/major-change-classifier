@@ -4939,6 +4939,7 @@ class Checker():
             text = re.sub("\\b(he|it)'s\\b","he is",text)
             text = re.sub("\\b100's\\b","hundreds",text)
             text = re.sub("\\b(\w+)'s\\b",r"\1 us",text)
+            text = re.sub("\\by'all\\b",r"you all",text)
 
             # remove rest
             text = re.sub("'s\\b","",text)
