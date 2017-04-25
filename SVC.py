@@ -3620,6 +3620,7 @@ class Checker():
 
         # known minors
         self.known_minors = [
+                "bitrates,bit rate",
                 "in,into",
                 "take away,takeaway",
                 "versus,v",
