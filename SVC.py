@@ -4932,6 +4932,7 @@ class Checker():
             text = re.sub("'d\\b"," would",text)
             ### currently, cannot->can is major, vice-versa is minor ###
             # and can->can't and can't->can are minor
+            text = re.sub("\\bthere's\\b",r"there is",text)
             text = re.sub("\\bthat's\\b",r"that is",text)
             text = re.sub("\\bcan't\\b","cannot",text) #
             text = re.sub("\\bwon't\\b","will not",text)
