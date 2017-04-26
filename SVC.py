@@ -4930,6 +4930,7 @@ class Checker():
             text = re.sub("'d\\b"," would",text)
             ### currently, cannot->can is major, vice-versa is minor ###
             # and can->can't and can't->can are minor
+            text = re.sub("\\bthat's\\b",r"that is",text)
             text = re.sub("\\bcan't\\b","cannot",text) #
             text = re.sub("\\bwon't\\b","will not",text)
             text = re.sub("\\bain't?","are not",text)
@@ -4945,7 +4946,6 @@ class Checker():
             text = re.sub("\\b100's\\b","hundreds",text)
             text = re.sub("\\b(\w+)'s\\b",r"\1 us",text)
             text = re.sub("\\by'all\\b",r"you all",text)
-            text = re.sub("\\bthat's\\b",r"that is",text)
 
             # remove rest
             text = re.sub("'s\\b","",text)
