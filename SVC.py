@@ -73,6 +73,7 @@ class Checker():
             "ha+",
             "wo+h",
             "ho+h?",
+            "aw+",
             ]
 
         filler_phrases = [
