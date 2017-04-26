@@ -5098,6 +5098,7 @@ class Checker():
 
             # units
             text = re.sub("\\bmm\\b","millimeter",text)
+            text = re.sub("\\bml\\b","milliliter",text)
             text = re.sub("\\bcm\\b","centimeter",text)
             text = re.sub("\\bkm\\b","kilometer",text)
 
