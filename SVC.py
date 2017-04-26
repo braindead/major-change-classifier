@@ -3622,6 +3622,7 @@ class Checker():
         self.known_minors = [
                 "bitrates,bit rate",
                 "in,into",
+                "to,into",
                 "take away,takeaway",
                 "versus,v",
                 "etcetera,et cetera",
@@ -4944,6 +4945,7 @@ class Checker():
             text = re.sub("\\b100's\\b","hundreds",text)
             text = re.sub("\\b(\w+)'s\\b",r"\1 us",text)
             text = re.sub("\\by'all\\b",r"you all",text)
+            text = re.sub("\\bthat's\\b",r"that is",text)
 
             # remove rest
             text = re.sub("'s\\b","",text)
