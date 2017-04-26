@@ -36,12 +36,13 @@ class Checker():
 
     def __init__(self):
 
-        model_file = "./SVC.pkl"
+        model_dir = os.path.dirname(os.path.realpath(__file__))
+        model_file = os.path.join(model_dir, "SVC.pkl")
         self.model = joblib.load(model_file)
         self.eps = 1e-4
 
-        w2v_dat = "./embed.dat"
-        w2v_vocab = "./embed.vocab"
+        w2v_dat = os.path.join(model_dir, "embed.dat")
+        w2v_vocab = os.path.join(model_dir, "embed.vocab")
 
         # create word embeddings and mapping of vocabulary item to index
         self.embeddings = np.memmap(w2v_dat, dtype=np.float64,
@@ -5172,18 +5173,14 @@ class Checker():
 
         return False
 
-    def predict_json(self, json_file, extended_fillers, debug):
+    def predict_json(self, data, extended_fillers=False, debug=False):
         predictions = []
         s1 = s2 = ""
 
         def save(p, r):
             if debug is True:
                 print "%s\t%s\t%s" % (p, ",".join(r), ",".join([s1, s2]))
-            else:
-                predictions.append(p)
-
-        with open(json_file) as data_file:    
-            data = json.load(data_file)
+            predictions.append(p)
 
         self.extended_fillers = extended_fillers
 
@@ -5223,5 +5220,5 @@ class Checker():
             # predict based on the trained SVC
             save(str(self.model.predict(self._generate(s1,s2))[0]), row_)
 
-        if debug is False:
-            print(json.dumps(predictions))
+        return predictions
+

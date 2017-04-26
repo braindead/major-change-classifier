@@ -1,24 +1,22 @@
+#!/usr/bin/python
+
 import sys
 import SVC
+import argparse
+import json
 
-checker = SVC.Checker()
+parser = argparse.ArgumentParser(description='Classify changes as major or minor')
+parser.add_argument('json_file', type=str, help='path to json file')
+parser.add_argument('--debug', dest='debug', action='store_true', default=False, help='print debug information')
+parser.add_argument('--extended-fillers', dest='extended_fillers', action='store_true', default=False, help='Use extended fillers filter')
+args = parser.parse_args()
 
-if len(sys.argv) > 1:
-    debug = False
-    extended_fillers = False
+if __name__ == '__main__': 
+    checker = SVC.Checker()
 
-    try:
-        if sys.argv[3] == "1":
-            debug = True
-    except IndexError:
-        debug = False
+    with open(args.json_file) as data_file:    
+        data = json.load(data_file)
 
-    try:
-        if sys.argv[2] == "1":
-            extended_fillers = True
-    except IndexError:
-        debug = False
-
-    checker.predict_json(sys.argv[1], extended_fillers, debug)
-else:
-    checker.predict('./data.csv')
+    predictions = checker.predict_json(data, args.extended_fillers, args.debug)
+    if args.debug is False:
+        print(json.dumps(predictions))
