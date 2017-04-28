@@ -32,10 +32,12 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 from scribie_num2text import num_to_text
 
+MAJOR = 2
+MINOR = 1
+
 class Checker():
 
     def __init__(self):
-
         model_dir = os.path.dirname(os.path.realpath(__file__))
         model_file = os.path.join(model_dir, "SVC.pkl")
         self.model = joblib.load(model_file)
@@ -5112,51 +5114,6 @@ class Checker():
 
         return cleaned
 
-
-    def predict(self,tsv_file):
-        """Print a string of predictions for each pair in the TSV file
-        """
-
-        # commented rows are for examining inputs to the model
-
-        numpy_file = np.genfromtxt(tsv_file,
-                                   dtype="str",delimiter="\t").reshape([-1,2])
-        #numpy_file = np.genfromtxt(tsv_file,
-        #                           dtype="str",delimiter="*").reshape([-1,2])
-
-        predictions = []
-
-        for row_ in numpy_file:
-
-            # clean each string pair of all fillers, metas, numbers, OOVs, etc.
-            row = self._cleaner(row_)
-
-            s1,s2 = row[0],row[1]
-
-            # complete deletions are considered minor
-            if s2 == "":
-                predictions.append("1")
-                #predictions.extend([row_[0],row[0]])
-                #predictions.extend([row_[1],row[1]])
-                continue
-
-            # empty first string with non-empty second is counted as major
-            if s1 == "":
-                predictions.append("2")
-                #predictions.extend([row_[0],row[0]])
-                #predictions.extend([row_[1],row[1]])
-                continue
-
-            # predict based on the trained SVC
-            predictions.append(str(self.model.predict(self._generate(s1,s2))[0]))
-            #predictions.extend([row_[0],row[0]])
-            #predictions.extend([row_[1],row[1]])
-
-        predictions = ",".join(predictions)
-        #predictions = np.asarray(predictions).reshape([-1,5])
-
-        print(predictions)
-
     def is_known_minor(self, row):
         if ",".join(row) in self.known_minors:
             return True
@@ -5175,7 +5132,7 @@ class Checker():
 
         return False
 
-    def predict_json(self, data, extended_fillers=False, debug=False):
+    def predict(self, data, extended_fillers=False, debug=False):
         predictions = []
         s1 = s2 = ""
 
@@ -5193,17 +5150,17 @@ class Checker():
 
             if s1 == "" and s2 == "":
                 if self.is_known_major(row_):
-                    save("2", row_)
+                    save(MAJOR, row_)
                 else:
-                    save("1", row_)
+                    save(MINOR, row_)
                 continue
 
             if self.is_known_minor(row):
-                save("1", row_)
+                save(MINOR, row_)
                 continue
 
             if self.is_known_major(row):
-                save("2", row_)
+                save(MAJOR, row_)
                 continue
 
             s1 = self._oov_clean(s1)
@@ -5211,16 +5168,16 @@ class Checker():
 
             # complete deletions are considered minor
             if s2 == "":
-                save("1", row_)
+                save(MINOR, row_)
                 continue
 
             # insertions are considered major
             if s1 == "":
-                save("2", row_)
+                save(MAJOR, row_)
                 continue
 
             # predict based on the trained SVC
-            save(str(self.model.predict(self._generate(s1,s2))[0]), row_)
+            save(self.model.predict(self._generate(s1,s2))[0], row_)
 
         return predictions
 
