@@ -5065,7 +5065,7 @@ class Checker():
             text = re.sub("\\betc\\b", "etcetera",text) #
 
             # states
-            text = re.sub("\\bIL\\b","Illinois",text) #
+            text = re.sub("\\bil\\b","illinois",text) #
 
             # roman numerals
             text = re.sub("\\bii\\b", "two", text);
