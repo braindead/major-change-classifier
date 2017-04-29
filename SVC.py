@@ -4972,6 +4972,7 @@ class Checker():
             text = re.sub("\\bwoulda\\b","would have",text)
             text = re.sub("\\btyre","tire",text)
             text = re.sub("\\btumour\\b","tumor",text)
+            text = re.sub("\\bhumour\\b","humor",text)
             text = re.sub("\\bglamour\\b","glamor",text)
             text = re.sub("\\bjewell","jewel",text)
             text = re.sub("\\bmobiliz","mobilis",text)
