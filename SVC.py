@@ -4978,6 +4978,7 @@ class Checker():
             text = re.sub("\\bmobiliz","mobilis",text)
             text = re.sub("\\bempathiz","empathis",text)
             text = re.sub("\\bemphasiz","emphasis",text)
+            text = re.sub("\\btheoriz","theoris",text)
             text = re.sub("\\blicence\\b","license",text)
             text = re.sub("\\banalyse\\b","analyze",text)
             text = re.sub("\\blymphs\\b","lymph",text)
