@@ -4965,47 +4965,9 @@ class Checker():
             text = re.sub("(\d*)(3rd)","\g<1>0 third",text)
             #text = re.sub("(\d+)(th)","\g<1>",text)
 
-            # substitutions 
-            text = re.sub("\\berr+\\b","err",text)
-            text = re.sub("\\bgotcha\\b","got you",text)
-            text = re.sub("\\bcoulda\\b","could have",text)
-            text = re.sub("\\bwoulda\\b","would have",text)
-            text = re.sub("\\btyre","tire",text)
-            text = re.sub("\\btumour\\b","tumor",text)
-            text = re.sub("\\bhumour\\b","humor",text)
-            text = re.sub("\\bglamour\\b","glamor",text)
-            text = re.sub("\\bjewell","jewel",text)
-            text = re.sub("\\bmobiliz","mobilis",text)
-            text = re.sub("\\bempathiz","empathis",text)
-            text = re.sub("\\bemphasiz","emphasis",text)
-            text = re.sub("\\btheoriz","theoris",text)
-            text = re.sub("\\blicence\\b","license",text)
-            text = re.sub("\\banalyse\\b","analyze",text)
-            text = re.sub("\\blymphs\\b","lymph",text)
-            text = re.sub("\\bmoisturiz", "moisturis", text);
-            text = re.sub("\\banaes", "anes", text);
-            text = re.sub("\\balumin", "alumini", text);
-            text = re.sub("\\bapologiz", "apologis", text);
-            text = re.sub("\\bsceptic", "skeptic", text);
-            text = re.sub("\\bst\\b", "street", text);
-            text = re.sub("\\bstorey\\b", "story", text);
-            text = re.sub("\\bnosey\\b", "nosy", text);
-            text = re.sub("\\bspelt\\b", "spelled", text);
-            text = re.sub("\\bdreamt\\b", "dreamed", text);
-            text = re.sub("\\bave\\b", "avenue", text);
-            text = re.sub("vitaliz", "vitalis", text);
-            text = re.sub("\\bminimiz", "minimis", text);
-            text = re.sub("paedi", "pedi", text);
-            text = re.sub("\\bpyjama", "pajama", text);
-            text = re.sub("\\bmum", "mom", text);
-            text = re.sub("\\bcheque", "check", text);
-            text = re.sub("\\bcalibre\\b", "caliber", text);
-            text = re.sub("\\bfibres?\\b", "fiber", text);
-            text = re.sub("litres?\\b", "liter", text);
-            text = re.sub("metres?\\b", "meter", text);
-            text = re.sub("\\borganiz", "organis", text);
-            text = re.sub("\\bdefence", "defense", text);
-            text = re.sub("\\boffence", "offense", text);
+            # spelling styles 
+            text = re.sub("\\btumour","tumor",text)
+            text = re.sub("\\bhumour","humor",text)
             text = re.sub("\\bflavour", "flavor", text);
             text = re.sub("\\bharbour", "harbor", text);
             text = re.sub("\\bbehaviour", "behavior", text);
@@ -5022,49 +4984,108 @@ class Checker():
             text = re.sub("\\bparlour", "parlor", text);
             text = re.sub("\\bdishonour", "dishonor", text);
             text = re.sub("\\bhonour", "honor", text);
+            text = re.sub("\\bglamour","glamor",text)
+
+            text = re.sub("\\bmobiliz(e|i)", r"mobilis\1",text)
+            text = re.sub("\\bempathiz(e|i)", r"empathis\1",text)
+            text = re.sub("\\bemphasiz(e|i)", r"emphasis\1",text)
+            text = re.sub("\\btheoriz(e|i)", r"theoris\1",text)
+            text = re.sub("\\bformaliz(e|i)", r"formalis\1",text)
+            text = re.sub("\\bnormaliz(e|i)", r"normalis\1",text)
+            text = re.sub("\\bmemoriz(e|i)", r"memoris\1",text)
+            text = re.sub("\\bparalyz(e|i)", r"paralys\1",text)
+            text = re.sub("\\banalyz(e|i)", r"analys\1",text)
+            text = re.sub("\\bmoisturiz(e|i)", r"moisturis\1", text);
+            text = re.sub("\\bapologiz(e|i)", r"apologis\1", text);
+            text = re.sub("\\bvitaliz(e|i)", r"vitalis\1", text);
+            text = re.sub("\\borganiz(e|i)", r"organis\1", text);
+            text = re.sub("\\bcapitaliz(e|i)", r"capitalis\1", text);
+            text = re.sub("\\butiliz(e|i)", r"utilis\1", text);
+            text = re.sub("\\boptimiz(e|i)", r"optimis\1", text);
+            text = re.sub("\\bemphasiz(e|i)", r"emphasis\1", text);
+            text = re.sub("\\bminimiz(e|i)", r"minimis\1", text);
+            text = re.sub("\\brecogniz(e|i)", r"recognis\1", text);
+            text = re.sub("\\brealiz(e|i)", r"realis\1", text);
+            text = re.sub("\\bsensitiz(e|i)", r"sensitis\1", text);
+
+            text = re.sub("\\btravell", "travel", text);
+            text = re.sub("\\bcancell", "cancel", text);
+            text = re.sub("\\blabell", "label", text);
+            text = re.sub("\\bmodell", "model", text);
+            text = re.sub("\\bcounsell", "counsel", text);
+            text = re.sub("\\benroll", "enrol", text) #
+
+            text = re.sub("\\bcentre", "center", text);
+            text = re.sub("\\btheatre", "theater", text);
+            text = re.sub("\\bcalibre\\b", "caliber", text);
+            text = re.sub("\\bfibres?\\b", "fiber", text);
+
+            text = re.sub("litres?\\b", "liter", text);
+            text = re.sub("metres?\\b", "meter", text);
+
+            # medical
+            text = re.sub("paedi", "pedi", text);
+            text = re.sub("\\bleukaemia\\b", "leukemia",text) #
+            text = re.sub("\\banaes", "anes", text);
+            text = re.sub("\\blymphs\\b","lymph",text)
+
+            text = re.sub("\\bspelt\\b", "spelled", text);
+            text = re.sub("\\bdreamt\\b", "dreamed", text);
+            text = re.sub("\\blearnt\\b", "learned",text) #
+
+            text = re.sub("\\bstorey\\b", "story", text);
+            text = re.sub("\\bnosey\\b", "nosy", text);
+
+            text = re.sub("\\bdefence", "defense", text);
+            text = re.sub("\\boffence", "offense", text);
+            text = re.sub("\\blicence\\b","license",text)
+
+            text = re.sub("\\balumin", "alumini", text);
+            text = re.sub("\\bsceptic", "skeptic", text);
+            text = re.sub("\\bpyjama", "pajama", text);
+            text = re.sub("\\bmum", "mom", text);
+            text = re.sub("\\bcheque", "check", text);
             text = re.sub("\\bespecially", "specially", text);
             text = re.sub("\\bpractis", "practic", text);
-            text = re.sub("\\boptimis", "optimiz", text);
-            text = re.sub("\\bcapitalis", "capitaliz", text);
-            text = re.sub("\\butilis", "utiliz", text);
-            text = re.sub("\\bemphasis", "emphasiz", text);
             text = re.sub("\\bcause", "because", text);
-            text = re.sub("\\btravelled\\b", "traveled", text);
-            text = re.sub("\\bcancelled\\b", "canceled", text);
-            text = re.sub("\\blabelled\\b", "labeled", text);
-            text = re.sub("\\bmodelled\\b", "modeled", text);
-            text = re.sub("\\bcounsell", "counsel", text);
-            text = re.sub("\\brecognis(e|i)", r"recogniz\1", text);
-            text = re.sub("\\brealis(e|i)", r"realiz\1", text);
-            text = re.sub("\\bsensitis(e|i)", r"sensitiz\1", text);
             text = re.sub("gement", "gment", text);
+            text = re.sub("\\bcatalogue?", "catalog", text);
+            text = re.sub("\\bprogramm", "program", text);
+            text = re.sub("\\bgauge", "gage", text);
+            text = re.sub("\\bformulae\\b", "formula", text) #
+            text = re.sub("\\bmould", "mold",text) #
+            text = re.sub("\\bjewell","jewel",text)
+            text = re.sub("\\btyre","tire",text)
+            text = re.sub("\\betcetra\\b", "etcetera",text) #
+
+            text = re.sub("\\berr+\\b","err",text)
+            text = re.sub("\\bjenn", "jen", text) #
+
+            # numeric
             text = re.sub("\\bfirst\\b", "one", text);
             text = re.sub("\\bsecond\\b", "two", text);
             text = re.sub("\\bthird\\b", "three", text);
-            text = re.sub("\\btravell", "travel", text);
-            text = re.sub("\\bcatalogue?", "catalog", text);
-            text = re.sub("\\bmetre", "meter", text);
-            text = re.sub("\\bcentre", "center", text);
-            text = re.sub("\\btheatre", "theater", text);
-            text = re.sub("\\bgauge", "gage", text);
-            text = re.sub("\\bprogramm", "program", text);
-            text = re.sub("\\blbs\\b", "pounds", text);
-            text = re.sub("\\bauth\\b", "authentication", text);
+
+            # contractions
             text = re.sub("\\bsorta\\b", "sort of",text) #
             text = re.sub("\\bwanna\\b", "want to",text) #
+            text = re.sub("\\bgotcha\\b","got you",text)
+            text = re.sub("\\bcoulda\\b","could have",text)
+            text = re.sub("\\bwoulda\\b","would have",text)
             text = re.sub("\\bshoulda\\b", "should have",text) #
+
+            # short forms
+            text = re.sub("\\betc\\b", "etcetera",text) #
+            text = re.sub("\\blbs\\b", "pounds", text);
             text = re.sub("\\bmid\\b", "middle",text) #
             text = re.sub("\\blab\\b", "laboratory",text) #
-            text = re.sub("\\bformulae\\b", "formula", text) #
-            text = re.sub("\\bpkwy\\b", "parkway", text) #
+            text = re.sub("\\bauth\\b", "authentication", text);
+
+            # addresses
             text = re.sub("\\brd\\b", "road", text) #
-            text = re.sub("\\benroll", "enrol", text) #
-            text = re.sub("\\bjenn", "jen", text) #
-            text = re.sub("\\bmould", "mold",text) #
-            text = re.sub("\\blearnt\\b", "learned",text) #
-            text = re.sub("\\bleukaemia\\b", "leukemia",text) #
-            text = re.sub("\\betcetra\\b", "etcetera",text) #
-            text = re.sub("\\betc\\b", "etcetera",text) #
+            text = re.sub("\\bst\\b", "street", text);
+            text = re.sub("\\bave\\b", "avenue", text);
+            text = re.sub("\\bpkwy\\b", "parkway", text) #
 
             # states
             text = re.sub("\\bil\\b","illinois",text) #
