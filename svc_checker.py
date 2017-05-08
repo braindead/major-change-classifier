@@ -17,6 +17,6 @@ if __name__ == '__main__':
     with open(args.json_file) as data_file:    
         data = json.load(data_file)
 
-    predictions = checker.predict_json(data, args.extended_fillers, args.debug)
+    predictions = checker.predict(data, args.extended_fillers, args.debug)
     if args.debug is False:
         print(json.dumps(predictions))
