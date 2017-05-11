@@ -3624,6 +3624,7 @@ class Checker():
 
         # known minors
         self.known_minors = [
+                "dr,drive",
                 "bitrates,bit rate",
                 "in,into",
                 "to,into",
