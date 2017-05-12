@@ -5010,6 +5010,7 @@ class Checker():
             text = re.sub("\\brealiz(e|i)", r"realis\1", text);
             text = re.sub("\\bsensitiz(e|i)", r"sensitis\1", text);
             text = re.sub("\\bpersonaliz(e|i)", r"personalis\1", text);
+            text = re.sub("\\bscrutiniz(e|i)", r"scrutinis\1", text);
 
             text = re.sub("\\btravell", "travel", text);
             text = re.sub("\\bcancell", "cancel", text);
