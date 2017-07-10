@@ -5203,7 +5203,13 @@ class Checker():
                 continue
 
             # predict based on the trained SVC
-            save(self.model.predict(self._generate(s1,s2))[0], row_)
+            prediction = self.model.predict(self._generate(s1,s2))[0]
+
+            # handle cases where only space is different between the two strings
+            if prediction == MAJOR and re.sub(" ", "", s1) == re.sub(" ", "", s2):
+                save(MINOR, row_)
+            else:
+                save(prediction, row_)
 
         return predictions
 
