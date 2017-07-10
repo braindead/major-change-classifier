@@ -628,7 +628,6 @@ class Checker():
             "frazier",
             "burke",
             "hanson",
-            "day",
             "mendoza",
             "moreno",
             "bowman",
@@ -3624,7 +3623,6 @@ class Checker():
 
         # known minors
         self.known_minors = [
-                "every day,everyday",
                 "dr,drive",
                 "bitrates,bit rate",
                 "in,into",
