@@ -5170,6 +5170,11 @@ class Checker():
         self.extended_fillers = extended_fillers
 
         for row_ in data:
+            s1, s2 = row_[0], row_[1]
+            if re.sub(" ", "", s1) == re.sub(" ", "", s2):
+                save(MINOR, row_)
+                continue
+
             row = self._cleaner(row_)
 
             s1,s2 = row[0],row[1]
@@ -5204,12 +5209,7 @@ class Checker():
 
             # predict based on the trained SVC
             prediction = self.model.predict(self._generate(s1,s2))[0]
-
-            # handle cases where only space is different between the two strings
-            if prediction == MAJOR and re.sub(" ", "", s1) == re.sub(" ", "", s2):
-                save(MINOR, row_)
-            else:
-                save(prediction, row_)
+            save(prediction, row_)
 
         return predictions
 
