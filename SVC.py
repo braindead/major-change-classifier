@@ -5171,7 +5171,7 @@ class Checker():
 
         for row_ in data:
             s1, s2 = row_[0], row_[1]
-            if re.sub(" ", "", s1) == re.sub(" ", "", s2):
+            if re.sub("[^\w]+", "", s1) == re.sub("[^\w]+", "", s2):
                 save(MINOR, row_)
                 continue
 
